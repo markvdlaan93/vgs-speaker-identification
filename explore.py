@@ -1,16 +1,23 @@
 import numpy as np
 
+# Values of the activation functions (64 values per speech signal) (5000,64)
 val_conv = np.load('data/flickr8k_val_conv.npy')
+# ?? (5000,1024)
 val_emb = np.load('data/flickr8k_val_emb.npy')
+# For each recurrent layer, the values of the activation function for each speech signal (5000, 4, 1024)
 val_rec = np.load('data/flickr8k_val_rec.npy')
+# Per speech signal, the ID of the speaker (5000,)
 val_spk = np.load('data/flickr8k_val_spk.npy')
+# Caption of each speech signal (5000,)
 val_text = np.load('data/flickr8k_val_text.npy')
+# MFCC vector per speech signal with 37 coefficients (5000,37)
 val_mfcc = np.load('data/flickr8k_val_mfcc.npy')
 
 def shapes(datasets):
     for dataset in datasets:
         print(dataset.shape)
         print(dataset[0])
+
 
 def majority():
     unique, counts = np.unique(val_spk, return_counts=True)
@@ -26,5 +33,5 @@ def majority():
     return majority_speaker[1] / total_occurrences
 
 
-#shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
-print(majority())
+shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
+#print(majority())
