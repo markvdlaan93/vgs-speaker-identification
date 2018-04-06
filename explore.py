@@ -35,13 +35,11 @@ def majority():
     return counts, (majority_speaker[1] / total_occurrences)
 
 def bar(dataset):
-    x = dataset[0,:]
-    y = dataset[1,:]
+    x = dataset[:,0]
+    y = dataset[:,1]
     plt.bar(x,y,align='center')
     plt.xlabel('Speaker ID')
     plt.ylabel('Occurrences')
-    for i in dataset:
-        plt.hlines(i[0],0,i[1])
     plt.show()
 
 # shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
