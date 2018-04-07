@@ -34,7 +34,7 @@ def majority():
 
     return counts, (majority_speaker[1] / total_occurrences)
 
-def bar(dataset):
+def speaker_occurrences(dataset):
     x = dataset[:,0]
     y = dataset[:,1]
     plt.bar(x,y,align='center')
@@ -42,6 +42,18 @@ def bar(dataset):
     plt.ylabel('Occurrences')
     plt.show()
 
+def hypothesis():
+    x = [-2, -1, 0, 1, 2, 3, 4]
+    y = [0.45, 0.35, 0.1, 0.2, 0.35, 0.45, 0.6]
+    plt.bar(x,y,align='center')
+    plt.xlabel('Learning directly from MFCC (-2), Convolutional layer(-1), Recurrent layer (0 till 4)')
+    plt.ylabel('Error rate')
+    plt.show()
+
+def train_test_split(dataset):
+    return None
+
 # shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
-counts, majority = majority()
-bar(counts)
+# counts, majority = majority()
+# speaker_occurrences(counts)
+hypothesis()
