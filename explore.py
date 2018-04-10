@@ -1,11 +1,13 @@
-import load_data
 import matplotlib.pyplot as plt
+import numpy as np
+import load_data
+
+val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
 
 def shapes(datasets):
     for dataset in datasets:
         print(dataset.shape)
         print(dataset[0])
-
 
 def majority():
     unique, counts = np.unique(val_spk, return_counts=True)
@@ -36,11 +38,7 @@ def hypothesis():
     plt.ylabel('Error rate')
     plt.show()
 
-def train_test_split(dataset):
-    #80/20 proportion
-    return None
-
 # shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
 # counts, majority = majority()
 # speaker_occurrences(counts)
-hypothesis()
+# hypothesis()
