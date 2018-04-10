@@ -18,6 +18,8 @@
 .idea/uiDesigner.xml
 .idea/misc.xml
 .idea/master-thesis.iml
+.idea/*
+__pycache__/*
 
 # Gradle:
 .idea/gradle.xml
