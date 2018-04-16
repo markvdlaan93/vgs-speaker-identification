@@ -28,7 +28,7 @@ def mfcc():
     nested_scores = np.zeros(NUM_TRIALS)
 
     for i in range(NUM_TRIALS):
-        print("BEGIN TRIAL {}".format(NUM_TRIALS))
+        print("BEGIN TRIAL {}".format(i))
 
         inner_fold = KFold(n_splits=5, random_state=i, shuffle=True)
         outer_fold = KFold(n_splits=5, random_state=i, shuffle=True)
@@ -46,7 +46,7 @@ def mfcc():
 
         print("BEST SCORE FOR NESTED FOLD: {}".format(nested_score.mean()))
 
-        print("END TRAIL {}".format(NUM_TRIALS))
+        print("END TRAIL {}".format(i))
 
     return non_nested_scores, nested_scores
 
