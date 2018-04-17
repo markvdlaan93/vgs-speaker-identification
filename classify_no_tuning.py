@@ -25,6 +25,9 @@ def mfcc():
 
     F1-score for fold 5 is 0.8026816159176354
     Accuracy score for fold 5 is 0.765
+
+    Average accuracy over all folds is thus 0.75025
+    Average F1-score over all folds is thus 0.80033
     @todo scramble data, randomize the data, the score should then be lower
     :return:
     """
@@ -80,5 +83,5 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
-print(conv())
+print(mfcc())
 # print(conv())
