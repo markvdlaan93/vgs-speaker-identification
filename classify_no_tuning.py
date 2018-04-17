@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score, f1_score, make_scorer
 import numpy as np
 
 val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
-
+N_SPLITS = 5
 
 def mfcc():
     """
@@ -56,9 +56,11 @@ def emb():
 
 
 def cross_val(X_train, y_train):
-    kf = KFold(n_splits=5, random_state=123)
+    kf = KFold(n_splits=N_SPLITS, random_state=123)
 
     count = 1
+    avg_acc = 0
+    avg_f1 = 0
     for train_index, test_index in kf.split(X_train):
         fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
         fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
@@ -71,7 +73,12 @@ def cross_val(X_train, y_train):
         print("F1-score for fold {} is {}".format(count, f1))
         print("Accuracy score for fold {} is {}".format(count, acc))
 
+        avg_acc += acc
+        avg_f1 += f1
         count += 1
 
-print(mfcc())
+    print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
+    print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
+
+print(conv())
 # print(conv())
