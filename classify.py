@@ -9,12 +9,23 @@ val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
 
 def mfcc_no_tuning():
     """
-    First run without further hyperparameter tuning (i.e. loss='log', max_iter=1000, n_jobs=1, learning_rate='optimal')
-    Score for fold 1 is 0.8106473829790354
-    Score for fold 2 is 0.8087015604365517
-    Score for fold 3 is 0.7892556020302715
-    Score for fold 4 is 0.7903686634189722
-    Score for fold 5 is 0.8026816159176354
+    First run without further hyperparameter tuning (i.e. loss='log', max_iter=1000, n_jobs=1, learning_rate='optimal'):
+    
+    F1-score for fold 1 is 0.8106473829790354
+    Accuracy score for fold 1 is 0.7625
+
+    F1-score for fold 2 is 0.8087015604365517
+    Accuracy score for fold 2 is 0.77625
+
+    F1-score for fold 3 is 0.7892556020302715
+    Accuracy score for fold 3 is 0.72875
+
+    F1-score for fold 4 is 0.7903686634189722
+    Accuracy score for fold 4 is 0.71875
+
+    F1-score for fold 5 is 0.8026816159176354
+    Accuracy score for fold 5 is 0.765
+    @todo scramble data, randomize the data, the score should then be lower
     :return:
     """
     X_train, X_test, y_train, y_test = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
@@ -30,9 +41,12 @@ def mfcc_no_tuning():
         model = SGDClassifier(loss='log', random_state=123, max_iter=1000, n_jobs=-1)
         model.fit(fold_x_train, fold_y_train)
         y_pred = model.predict(fold_x_test)
-        score = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
-        print("Score for fold {} is {}".format(count, score))
-        result[count] = score
+        f1 = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
+        acc = accuracy_score(fold_y_test, y_pred)
+        print("F1-score for fold {} is {}".format(count, f1))
+        print("Accuracy score for fold {} is {}".format(count, acc))
+
+        count += 1
 
     return result
 
@@ -80,5 +94,5 @@ def conv():
     y_pred = model.predict(X_val)
     return f1_score(y_val, y_pred, average='weighted', labels=np.unique(y_pred))
 
-print(mfcc_cv_tuning())
+print(mfcc_no_tuning())
 # print(conv())
