@@ -10,7 +10,7 @@ val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
 def mfcc_no_tuning():
     """
     First run without further hyperparameter tuning (i.e. loss='log', max_iter=1000, n_jobs=1, learning_rate='optimal'):
-    
+
     F1-score for fold 1 is 0.8106473829790354
     Accuracy score for fold 1 is 0.7625
 
@@ -28,31 +28,13 @@ def mfcc_no_tuning():
     @todo scramble data, randomize the data, the score should then be lower
     :return:
     """
-    X_train, X_test, y_train, y_test = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
+    X_train, _, y_train, _ = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
 
-    kf = KFold(n_splits=5, random_state=123)
-    result = {}
-    count = 1
-
-    for train_index, test_index in kf.split(X_train):
-        fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
-        fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
-
-        model = SGDClassifier(loss='log', random_state=123, max_iter=1000, n_jobs=-1)
-        model.fit(fold_x_train, fold_y_train)
-        y_pred = model.predict(fold_x_test)
-        f1 = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
-        acc = accuracy_score(fold_y_test, y_pred)
-        print("F1-score for fold {} is {}".format(count, f1))
-        print("Accuracy score for fold {} is {}".format(count, acc))
-
-        count += 1
-
-    return result
+    cross_val(X_train, y_train)
 
 def mfcc_cv_tuning():
 
-    X_train, X_test, y_train, y_test = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
+    X_train, _, y_train, _ = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
 
     p_grid = {
         'loss': ['hinge', 'log', 'perceptron'],
@@ -93,6 +75,35 @@ def conv():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_val)
     return f1_score(y_val, y_pred, average='weighted', labels=np.unique(y_pred))
+
+def rec_layers():
+    amount_layers = val_rec.shape[1]
+    for i in range(amount_layers):
+        layer = val_rec[:,i,:]
+        X_train, _, y_train, _ = train_test_split(layer, val_spk, test_size=0.2, random_state=123)
+
+
+
+def emb():
+    return None
+
+def cross_val(X_train, y_train):
+    kf = KFold(n_splits=5, random_state=123)
+
+    count = 1
+    for train_index, test_index in kf.split(X_train):
+        fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
+        fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
+
+        model = SGDClassifier(loss='log', random_state=123, max_iter=1000, n_jobs=-1)
+        model.fit(fold_x_train, fold_y_train)
+        y_pred = model.predict(fold_x_test)
+        f1 = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
+        acc = accuracy_score(fold_y_test, y_pred)
+        print("F1-score for fold {} is {}".format(count, f1))
+        print("Accuracy score for fold {} is {}".format(count, acc))
+
+        count += 1
 
 print(mfcc_no_tuning())
 # print(conv())
