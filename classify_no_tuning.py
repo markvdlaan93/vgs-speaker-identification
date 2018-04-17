@@ -82,8 +82,29 @@ def rec_layers():
 
     Average accuracy over all folds is thus 0.9295
     Average F1-score over all folds is thus 0.9472302716385617
+    ------------------------------------------
 
     CV results for recurrent layer 2
+    F1-score for fold 1 is 0.911593908365061
+    Accuracy score for fold 1 is 0.88625
+
+    F1-score for fold 2 is 0.9274314392304172
+    Accuracy score for fold 2 is 0.905
+
+    F1-score for fold 3 is 0.9126688616322778
+    Accuracy score for fold 3 is 0.8975
+
+    F1-score for fold 4 is 0.9108803229874641
+    Accuracy score for fold 4 is 0.8875
+
+    F1-score for fold 5 is 0.9200280793153092
+    Accuracy score for fold 5 is 0.8925
+
+    Average accuracy over all folds is thus 0.89375
+    Average F1-score over all folds is thus 0.9165205223061058
+    -------------------------------------------
+
+    CV results for recurrent layer 3
     :return:
     """
     amount_layers = val_rec.shape[1]
