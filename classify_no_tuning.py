@@ -40,14 +40,19 @@ def conv():
     """
     F1-score for fold 1 is 0.816062683336208
     Accuracy score for fold 1 is 0.77625
+
     F1-score for fold 2 is 0.8185344496138379
     Accuracy score for fold 2 is 0.77125
+
     F1-score for fold 3 is 0.7746713885463093
     Accuracy score for fold 3 is 0.73375
+
     F1-score for fold 4 is 0.7986601686093152
     Accuracy score for fold 4 is 0.74625
+
     F1-score for fold 5 is 0.7951733274536912
     Accuracy score for fold 5 is 0.76125
+
     Average accuracy over all folds is thus 0.75775
     Average F1-score over all folds is thus 0.80062
     :return:
@@ -58,6 +63,29 @@ def conv():
 
 
 def rec_layers():
+    """
+    CV results for recurrent layer 1
+    F1-score for fold 1 is 0.9469379539328668
+    Accuracy score for fold 1 is 0.925
+
+    F1-score for fold 2 is 0.9567064066330592
+    Accuracy score for fold 2 is 0.93875
+
+    F1-score for fold 3 is 0.9511889649936034
+    Accuracy score for fold 3 is 0.94375
+
+    F1-score for fold 4 is 0.9342606971400774
+    Accuracy score for fold 4 is 0.9125
+
+    F1-score for fold 5 is 0.9470573354932018
+    Accuracy score for fold 5 is 0.9275
+
+    Average accuracy over all folds is thus 0.9295
+    Average F1-score over all folds is thus 0.9472302716385617
+
+    CV results for recurrent layer 2
+    :return:
+    """
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:,i,:]
@@ -83,7 +111,7 @@ def cross_val(X_train, y_train):
         fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
         fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
 
-        model = SGDClassifier(loss='log', random_state=123, max_iter=1000, n_jobs=-1)
+        model = SGDClassifier(loss='log', random_state=123, max_iter=1000)
         model.fit(fold_x_train, fold_y_train)
         y_pred = model.predict(fold_x_test)
         f1 = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
@@ -98,4 +126,4 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
-print(conv())
+print(rec_layers())
