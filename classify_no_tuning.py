@@ -125,6 +125,23 @@ def rec_layers():
     --------------------------------------------
 
     CV results for recurrent layer 4
+    F1-score for fold 1 is 0.8545813571355726
+    Accuracy score for fold 1 is 0.82125
+
+    F1-score for fold 2 is 0.8570279923140323
+    Accuracy score for fold 2 is 0.82625
+
+    F1-score for fold 3 is 0.8417387765575739
+    Accuracy score for fold 3 is 0.8275
+
+    F1-score for fold 4 is 0.8393485550622695
+    Accuracy score for fold 4 is 0.815
+
+    F1-score for fold 5 is 0.8373630122424196
+    Accuracy score for fold 5 is 0.81375
+
+    Average accuracy over all folds is thus 0.82075
+    Average F1-score over all folds is thus 0.8460119386623735
     :return:
     """
     amount_layers = val_rec.shape[1]
@@ -137,6 +154,26 @@ def rec_layers():
 
 
 def emb():
+    """
+    F1-score for fold 1 is 0.568204102715355
+    Accuracy score for fold 1 is 0.525
+
+    F1-score for fold 2 is 0.533378397624587
+    Accuracy score for fold 2 is 0.49625
+
+    F1-score for fold 3 is 0.5521153358376801
+    Accuracy score for fold 3 is 0.51625
+
+    F1-score for fold 4 is 0.593850144359544
+    Accuracy score for fold 4 is 0.53625
+
+    F1-score for fold 5 is 0.5596958097633553
+    Accuracy score for fold 5 is 0.51375
+
+    Average accuracy over all folds is thus 0.5175
+    Average F1-score over all folds is thus 0.5614487580601043
+    :return:
+    """
     X_train, _, y_train, _ = train_test_split(val_emb, val_spk, test_size=0.2, random_state=123)
 
     cross_val(X_train, y_train)

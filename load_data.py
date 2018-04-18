@@ -3,7 +3,7 @@ import numpy as np
 def dataset():
     # Values of the activation functions (64 values per speech signal) => (5000,64)
     val_conv = np.load('data/flickr8k_val_conv.npy')
-    # Output layer?? (5000,1024)
+    # Output layer (5000,1024)
     val_emb = np.load('data/flickr8k_val_emb.npy')
     # For each recurrent layer, the values of the activation functions (1024 values per layer) for each speech signal
     # => (5000, 4, 1024)
