@@ -28,7 +28,6 @@ def mfcc():
 
     Average accuracy over all folds is thus 0.75025
     Average F1-score over all folds is thus 0.80033
-    @todo scramble data, randomize the data, the score should then be lower
     :return:
     """
     X_train, _, y_train, _ = train_test_split(val_mfcc, val_spk, test_size=0.2, random_state=123)
