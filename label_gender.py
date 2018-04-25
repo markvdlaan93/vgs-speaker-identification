@@ -1,4 +1,5 @@
 import numpy as np
+import subprocess
 
 def labels():
     """
@@ -203,7 +204,12 @@ def audio_speaker(file):
                 result.append(words)
                 ids.append(words[1])
 
-        return result
+        return np.array(result)
 
+def play_audio(audio_speakers):
+    for speaker in audio_speakers[0:2]:
+        print("ID of is speaker: {}".format(speaker[1]))
+        subprocess.check_call(["afplay", '/Applications/MAMP/htdocs/flickr_audio/wavs/' + speaker[0]])
 
-audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
+audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
+play_audio(audio_speakers)
