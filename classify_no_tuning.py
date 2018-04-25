@@ -143,6 +143,7 @@ def rec_layers():
     Average F1-score over all folds is thus 0.8460119386623735
     :return:
     """
+    print(val_rec.shape)
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:,i,:]

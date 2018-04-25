@@ -191,4 +191,19 @@ def labels():
         [183,    0]
     ])
 
-print(labels())
+
+def audio_speaker(file):
+    with open(file) as fp:
+        lines = fp.readlines()
+        result = []
+        ids = []
+        for line in lines:
+            words = line.split()
+            if words[1] not in ids:
+                result.append(words)
+                ids.append(words[1])
+
+        return result
+
+
+audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
