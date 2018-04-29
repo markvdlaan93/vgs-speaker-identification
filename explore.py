@@ -63,16 +63,28 @@ def results_no_tuning_acc():
     plt.savefig('./img/result_no_tuning_accuracy.png')
 
 def plot_male_female_dist(val_spk):
-    val_spk = val_spk.astype(int)
-    male = 0
-    female = 0
-
     counts, maj = majority()
     labels_gender = label_gender.filter_speakers(counts)
     # Two arrays should now have the same size and the same ID's
     assert labels_gender.shape == counts.shape
     assert np.all(labels_gender[:,0] == counts[:,0])
 
+    male = 0
+    female = 0
+    for i in range(labels_gender.shape[0]):
+        if not labels_gender[i][1]:
+            male += counts[i][1]
+        else:
+            female += counts[i][1]
+
+    # assert male + female == val_spk.shape[0]
+    print(male)
+    print(female)
+
+    plt.bar([0,1], [male,female], align='center')
+    plt.xticks([0,1], ['Male','Female'])
+    plt.savefig('./img/male_female_distribution.png')
+    plt.show()
 
 
 plot_male_female_dist(val_spk)
