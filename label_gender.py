@@ -625,6 +625,9 @@ def play_audio(audio_speakers):
         print("ID of is speaker: {}".format(speaker[1]))
         subprocess.check_call(["afplay", '/Applications/MAMP/htdocs/flickr_audio/wavs/' + speaker[0]])
 
+def create_y_train(val_spk):
+
+
 # audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
 # play_audio(audio_speakers)
 

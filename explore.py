@@ -77,9 +77,7 @@ def plot_male_female_dist(val_spk):
         else:
             female += counts[i][1]
 
-    # assert male + female == val_spk.shape[0]
-    print(male)
-    print(female)
+    assert male + female == val_spk.shape[0]
 
     plt.bar([0,1], [male,female], align='center')
     plt.xticks([0,1], ['Male','Female'])
