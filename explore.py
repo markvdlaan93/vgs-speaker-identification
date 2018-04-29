@@ -69,7 +69,9 @@ def plot_male_female_dist(val_spk):
 
     counts, maj = majority()
     labels_gender = label_gender.filter_speakers(counts)
-    # print(labels_gender)
+    # Two arrays should now have the same size and the same ID's
+    assert labels_gender.shape == counts.shape
+    assert np.all(labels_gender[:,0] == counts[:,0])
 
 
 
