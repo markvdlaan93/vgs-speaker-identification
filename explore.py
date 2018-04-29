@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import load_data
 import label_gender
+import majority
 
 val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
 
@@ -9,22 +10,6 @@ def shapes(datasets):
     for dataset in datasets:
         print(dataset.shape)
         print(dataset[0])
-
-def majority():
-    """
-    :return: counts, majority
-    """
-    unique, counts = np.unique(val_spk, return_counts=True)
-    counts = np.transpose(np.asarray((unique, counts))).astype(int)
-    counts = np.sort(counts, axis=0)
-
-    # Summing of frequencies of all speakers should be equal to the size of the speaker dataset
-    total_occurrences = counts[:, 1].sum()
-    assert total_occurrences == val_spk.shape[0]
-
-    majority_speaker = counts[counts.shape[0] - 1]
-
-    return counts, (majority_speaker[1] / total_occurrences)
 
 def speaker_occurrences(dataset):
     x = dataset[:,0]
@@ -63,7 +48,7 @@ def results_no_tuning_acc():
     plt.savefig('./img/result_no_tuning_accuracy.png')
 
 def plot_male_female_dist(val_spk):
-    counts, maj = majority()
+    counts, maj = majority.majority(val_spk)
     labels_gender = label_gender.filter_speakers(counts)
     # Two arrays should now have the same size and the same ID's
     assert labels_gender.shape == counts.shape

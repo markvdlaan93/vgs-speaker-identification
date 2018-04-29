@@ -1,5 +1,6 @@
 import numpy as np
 import subprocess
+import majority
 
 def labels_first_count():
     """
@@ -626,7 +627,21 @@ def play_audio(audio_speakers):
         subprocess.check_call(["afplay", '/Applications/MAMP/htdocs/flickr_audio/wavs/' + speaker[0]])
 
 def create_y_train(val_spk):
+    val_spk = np.array(val_spk.astype(int))
+    val_gender = np.zeros(val_spk.shape)
+    counts, _ = majority.majority(val_spk)
+    labels = filter_speakers(counts)
 
+
+    for i in range(val_spk.shape[0]):
+        id = val_spk[i]
+        index = np.where(labels[:,0] == id)[0][0]
+        if labels[index][1]:
+            val_gender[i] = 1
+        else:
+            val_gender[i] = 0
+
+    np.save('./data/flickr8k_val_gender.npy', val_gender)
 
 # audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
 # play_audio(audio_speakers)
