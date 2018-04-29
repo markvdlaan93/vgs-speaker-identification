@@ -632,16 +632,24 @@ def create_y_train(val_spk):
     counts, _ = majority.majority(val_spk)
     labels = filter_speakers(counts)
 
-
+    male = 0
+    female = 0
     for i in range(val_spk.shape[0]):
         id = val_spk[i]
         index = np.where(labels[:,0] == id)[0][0]
         if labels[index][1]:
+            male += 1
             val_gender[i] = 1
         else:
+            female += 1
             val_gender[i] = 0
 
+    # @todo this is not equal to bar plot??
+    print(male)
+    print(female)
     np.save('./data/flickr8k_val_gender.npy', val_gender)
+
+    return val_gender
 
 # audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
 # play_audio(audio_speakers)

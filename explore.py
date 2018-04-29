@@ -69,5 +69,3 @@ def plot_male_female_dist(val_spk):
     plt.savefig('./img/male_female_distribution.png')
     plt.show()
 
-
-plot_male_female_dist(val_spk)
