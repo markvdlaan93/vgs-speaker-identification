@@ -233,7 +233,7 @@ def labels_second_count():
         [ 32,    1],
         [ 33,    0],
         [ 34,    0],
-        # [ 35,    0],
+        [ 35,    0], # Doubt
         [ 36,    1],
         [ 37,    0],
         [ 38,    1],
@@ -250,7 +250,7 @@ def labels_second_count():
         [ 49,    1],
         [ 50,    1],
         [ 51,    0],
-        # [ 52,    1],
+        [ 52,    1], # Doubt
         [ 53,    1],
         [ 54,    1],
         [ 55,    1],
@@ -275,7 +275,7 @@ def labels_second_count():
         [ 74,    1],
         [ 75,    0],
         [ 76,    0],
-        # [ 77,    1],
+        [ 77,    1], # Doubt
         [ 78,    0],
         [ 79,    0],
         [ 80,    1],
@@ -292,7 +292,7 @@ def labels_second_count():
         [ 91,    1],
         [ 92,    0],
         [ 93,    1],
-        # [ 94,    1],
+        [ 94,    1], # Doubt
         [ 95,    1],
         [ 96,    0],
         [ 97,    1],
@@ -300,7 +300,7 @@ def labels_second_count():
         [ 99,    1],
         [100,    0],
         [101,    0],
-        # [102,    0],
+        [102,    0], # Doubt
         [103,    0],
         [104,    1],
         [105,    0],
@@ -345,7 +345,7 @@ def labels_second_count():
         [144,    1],
         [145,    1],
         [146,    1],
-        # [147,    0],
+        [147,    0], # Doubt
         [148,    0],
         [149,    0],
         [150,    0],
@@ -363,7 +363,7 @@ def labels_second_count():
         [162,    0],
         [163,    1],
         [164,    1],
-        # [165,    0],
+        [165,    0], # Doubt
         [166,    1],
         [167,    1],
         [168,    1],
@@ -372,17 +372,27 @@ def labels_second_count():
         [171,    1],
         [172,    0],
         [173,    0],
-        # [174,    0],
+        [174,    0], # Doubt
         [175,    1],
         [176,    1],
         [177,    0],
         [178,    0],
         [179,    0],
         [180,    1],
-        # [181,    0],
+        [181,    0], # Doubt
         [182,    1],
         [183,    1]
     ])
+
+def compare_rounds():
+    result_round_1 = labels_first_count()
+    result_round_2 = labels_second_count()
+    for i in range(result_round_1.shape[0]):
+        if result_round_1[i][1] != result_round_2[i][1]:
+            print('{} is not the same'.format(i+1))
+
+
+
 
 def filter_speakers(counts):
     result = labels_first_count()
@@ -411,6 +421,7 @@ def play_audio(audio_speakers):
         print("ID of is speaker: {}".format(speaker[1]))
         subprocess.check_call(["afplay", '/Applications/MAMP/htdocs/flickr_audio/wavs/' + speaker[0]])
 
-audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
-play_audio(audio_speakers)
+# audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
+# play_audio(audio_speakers)
 
+compare_rounds()
