@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import load_data
+import label_gender
 
 val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
 
@@ -58,10 +59,22 @@ def results_no_tuning_acc():
     plt.ylabel('Accuracy')
     plt.savefig('./img/result_no_tuning_accuracy.png')
 
-results_no_tuning_f1_score()
-results_no_tuning_acc()
+# def plot_male_female_dist(val_spk, audio_speakers):
+#     val_spk = np.array(val_spk).astype(int)
+#     val_spk = np.unique(val_spk)
+#     val_spk.sort(axis=0)
+#     male = 0
+#     female = 0
+#     counts = majority()[0]
+#     print(counts)
+#     for speaker_id in val_spk:
+#         for audio_speaker in audio_speakers:
+#             if speaker_id == audio_speaker[0]:
+#                 test = np.where(counts[:, 0] == speaker_id)
+#                 print(test)
+#                 print('hoi')
 
-# shapes([val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc])
-# counts, majority = majority()
-# speaker_occurrences(counts)
-# hypothesis()
+# audio_speakers = label_gender.labels_first_count()
+# plot_male_female_dist(val_spk, audio_speakers)
+
+label_gender.filter_speakers(majority()[0])
