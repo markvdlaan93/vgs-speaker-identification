@@ -11,6 +11,9 @@ def shapes(datasets):
         print(dataset[0])
 
 def majority():
+    """
+    :return: counts, majority
+    """
     unique, counts = np.unique(val_spk, return_counts=True)
     counts = np.transpose(np.asarray((unique, counts))).astype(int)
     counts = np.sort(counts, axis=0)
@@ -59,22 +62,15 @@ def results_no_tuning_acc():
     plt.ylabel('Accuracy')
     plt.savefig('./img/result_no_tuning_accuracy.png')
 
-# def plot_male_female_dist(val_spk, audio_speakers):
-#     val_spk = np.array(val_spk).astype(int)
-#     val_spk = np.unique(val_spk)
-#     val_spk.sort(axis=0)
-#     male = 0
-#     female = 0
-#     counts = majority()[0]
-#     print(counts)
-#     for speaker_id in val_spk:
-#         for audio_speaker in audio_speakers:
-#             if speaker_id == audio_speaker[0]:
-#                 test = np.where(counts[:, 0] == speaker_id)
-#                 print(test)
-#                 print('hoi')
+def plot_male_female_dist(val_spk):
+    val_spk = val_spk.astype(int)
+    male = 0
+    female = 0
 
-# audio_speakers = label_gender.labels_first_count()
-# plot_male_female_dist(val_spk, audio_speakers)
+    counts, maj = majority()
+    labels_gender = label_gender.filter_speakers(counts)
+    # print(labels_gender)
 
-label_gender.filter_speakers(majority()[0])
+
+
+plot_male_female_dist(val_spk)

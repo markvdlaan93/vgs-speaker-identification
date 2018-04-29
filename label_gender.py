@@ -586,7 +586,7 @@ def compare_rounds():
     147 is not the same
     165 is not the same
     177 is not the same
-    :return:
+    :return: ndarray
     """
     result_round_1 = labels_first_count()
     result_round_2 = labels_second_count()
@@ -594,17 +594,18 @@ def compare_rounds():
         if result_round_1[i][1] != result_round_2[i][1]:
             print('{} is not the same'.format(i+1))
 
-
-
-
 def filter_speakers(counts):
-    result = labels_first_count()
+    """
+    Speaker's that should be removed: 121, 136, 159, 169, 172, 174, 175
+    :param counts:
+    :return:
+    """
+    result = labels_final()
+    indices = []
     for speaker in result:
         if speaker[0] not in counts[:, 0]:
-            # print("Waar voor count {}".format(speaker[0]))
-            print(speaker[0])
-            result[:,0] == speaker[0]
-    print(result)
+            indices.append(speaker[0]-1)
+    return np.delete(result, indices, 0)
 
 def audio_speaker(file):
     with open(file) as fp:
@@ -627,4 +628,4 @@ def play_audio(audio_speakers):
 # audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
 # play_audio(audio_speakers)
 
-compare_rounds()
+# compare_rounds()
