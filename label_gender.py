@@ -649,12 +649,49 @@ def create_y_train(val_spk):
         val_gender[i] = gender
 
     # Extra check in order to make sure that everything went alright
-    sum = 0
+    female = 0
     for label in val_gender:
-        sum += label
-    print(sum)
+        female += label
+
+    male_count, female_count = count_occurences_male_female(val_spk)
+    assert female == female_count and val_gender.shape[0] - female == male_count
 
     return val_gender
+
+def count_occurences_male_female(val_spk):
+    labels_gender = labels_final()
+
+    # Count males and females in labels_gender final count (79 males, 104 males)
+    male = 0
+    female = 0
+    for label in labels_gender:
+        if not label[1]:
+            male += 1
+        else:
+            female += 1
+
+    counts, _ = majority.majority(val_spk)
+
+    # Turn counts into dictionary
+    counts_dict = {}
+    for count in counts:
+        counts_dict[count[0]] = count[1]
+
+    # Count occurrences in validation set based on the counts of occurrences (1941 speech fragments with males,
+    # 3059 speech fragments with females)
+    male = 0
+    female = 0
+    for label in labels_gender:
+        if label[0] in counts_dict:
+            count = counts_dict[label[0]]
+            # Comment out to see detailed view of how the numbers are calculated
+            # print("For {} the count is {} with gender {}".format(label[0], count, label[1]))
+            if not label[1]:
+                male += count
+            else:
+                female += count
+
+    return male, female
 
 # audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
 # play_audio(audio_speakers)
