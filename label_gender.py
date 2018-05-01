@@ -693,7 +693,7 @@ def count_occurences_male_female(val_spk):
 
     return male, female
 
-# audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
-# play_audio(audio_speakers)
+audio_speakers = audio_speaker('/Applications/MAMP/htdocs/flickr_audio/wav2spk.txt')
+play_audio(audio_speakers)
 
 # compare_rounds()
