@@ -3,8 +3,10 @@ from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_sc
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score, f1_score, make_scorer
 import numpy as np
+import label_gender
 
 val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
+val_gender = label_gender.create_y_train(val_spk)
 N_SPLITS = 5
 
 def mfcc():
@@ -30,6 +32,31 @@ def mfcc():
     np.random.shuffle(y_train)
 
     cross_val(X_train, y_train)
+
+def mfcc_gender():
+    """
+    F1-score for fold 1 is 0.42870627626748264
+    Accuracy score for fold 1 is 0.467
+
+    F1-score for fold 2 is 0.46561584643034676
+    Accuracy score for fold 2 is 0.49
+
+    F1-score for fold 3 is 0.5070520252591092
+    Accuracy score for fold 3 is 0.517
+
+    F1-score for fold 4 is 0.40030279737903224
+    Accuracy score for fold 4 is 0.526
+
+    F1-score for fold 5 is 0.3975579250852344
+    Accuracy score for fold 5 is 0.533
+    
+    Average accuracy over all folds is thus 0.5065999999999999
+    Average F1-score over all folds is thus 0.4398469740842411
+    :return:
+    """
+    np.random.shuffle(val_gender)
+
+    cross_val(val_mfcc, val_gender)
 
 
 def cross_val(X_train, y_train):
@@ -57,3 +84,4 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
+mfcc_gender()
