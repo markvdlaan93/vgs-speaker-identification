@@ -662,7 +662,7 @@ def create_y_train(val_spk):
 def count_occurences_male_female(val_spk):
     labels_gender = labels_final()
 
-    # Count males and females in labels_gender final count (79 males, 104 males)
+    # Count males and females in labels_gender final count (79 males, 104 female)
     male = 0
     female = 0
     for label in labels_gender:
@@ -678,8 +678,7 @@ def count_occurences_male_female(val_spk):
     for count in counts:
         counts_dict[count[0]] = count[1]
 
-    # Count occurrences in validation set based on the counts of occurrences (1941 speech fragments with males,
-    # 3059 speech fragments with females)
+    # Count occurrences in validation set based on the counts of occurrences
     male = 0
     female = 0
     for label in labels_gender:
