@@ -10,8 +10,16 @@ val_gender = label_gender.create_y_train(val_spk)
 N_SPLITS = 5
 
 def mfcc():
-    return None
+    """
+    First run without further hyperparameter tuning (i.e. loss='log', max_iter=1000, n_jobs=1, learning_rate='optimal'):
 
+
+
+    Average accuracy over all folds is thus
+    Average F1-score over all folds is thus
+    :return:
+    """
+    cross_val(val_mfcc, val_gender)
 
 def conv():
     return None

@@ -653,6 +653,7 @@ def create_y_train(val_spk):
     for label in val_gender:
         female += label
 
+    # Make sure the right gender is assigned to the right speaker
     male_count, female_count = count_occurences_male_female(val_spk)
     assert female == female_count and val_gender.shape[0] - female == male_count
 
