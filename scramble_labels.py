@@ -49,7 +49,7 @@ def mfcc_gender():
 
     F1-score for fold 5 is 0.3975579250852344
     Accuracy score for fold 5 is 0.533
-    
+
     Average accuracy over all folds is thus 0.5065999999999999
     Average F1-score over all folds is thus 0.4398469740842411
     :return:
@@ -58,6 +58,30 @@ def mfcc_gender():
 
     cross_val(val_mfcc, val_gender)
 
+def conv_gender():
+    """
+    F1-score for fold 1 is 0.5269497813392654
+    Accuracy score for fold 1 is 0.527
+
+    F1-score for fold 2 is 0.4601970917459985
+    Accuracy score for fold 2 is 0.49
+
+    F1-score for fold 3 is 0.42217014457174035
+    Accuracy score for fold 3 is 0.468
+
+    F1-score for fold 4 is 0.44451371069182394
+    Accuracy score for fold 4 is 0.513
+
+    F1-score for fold 5 is 0.411133082999001
+    Accuracy score for fold 5 is 0.463
+    
+    Average accuracy over all folds is thus 0.49219999999999997
+    Average F1-score over all folds is thus 0.45299276226956586
+    :return:
+    """
+    np.random.shuffle(val_gender)
+
+    cross_val(val_conv, val_gender)
 
 def cross_val(X_train, y_train):
     kf = KFold(n_splits=N_SPLITS, random_state=123)
@@ -84,4 +108,4 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
-mfcc_gender()
+conv_gender()
