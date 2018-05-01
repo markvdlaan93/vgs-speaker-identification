@@ -648,7 +648,11 @@ def create_y_train(val_spk):
         gender = labels_dict[id]
         val_gender[i] = gender
 
-    np.save('./data/flickr8k_val_gender.npy', val_gender)
+    # Extra check in order to make sure that everything went alright
+    sum = 0
+    for label in val_gender:
+        sum += label
+    print(sum)
 
     return val_gender
 

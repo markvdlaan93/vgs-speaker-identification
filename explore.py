@@ -104,5 +104,5 @@ def count_occurences_male_female(val_spk):
 
     return male, female
 
-#count_occurences_male_female(val_spk)
+count_occurences_male_female(val_spk)
 

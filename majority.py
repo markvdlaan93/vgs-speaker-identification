@@ -6,6 +6,7 @@ def majority(val_spk):
     """
     unique, counts = np.unique(val_spk, return_counts=True)
     counts = np.transpose(np.asarray((unique, counts))).astype(int)
+    # @todo PROBLEM HERE. LABELS ARE SHIFTED!
     counts = np.sort(counts, axis=0)
 
     # Summing of frequencies of all speakers should be equal to the size of the speaker dataset
