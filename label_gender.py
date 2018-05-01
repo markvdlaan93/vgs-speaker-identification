@@ -627,26 +627,27 @@ def play_audio(audio_speakers):
         subprocess.check_call(["afplay", '/Applications/MAMP/htdocs/flickr_audio/wavs/' + speaker[0]])
 
 def create_y_train(val_spk):
+    """
+    Creating the labels for y_train by check if speaker ID is female (== 1) or a male (== 0)
+    :param val_spk:
+    :return:
+    """
     val_spk = np.array(val_spk.astype(int))
     val_gender = np.zeros(val_spk.shape)
     counts, _ = majority.majority(val_spk)
     labels = filter_speakers(counts)
 
-    male = 0
-    female = 0
+    # Turn into dictionary in order to easily access indices
+    labels_dict = {}
+    for label in labels:
+        labels_dict[label[0]] = label[1]
+
+    # Fill gender array based on gender dictionary
     for i in range(val_spk.shape[0]):
         id = val_spk[i]
-        index = np.where(labels[:,0] == id)[0][0]
-        if labels[index][1]:
-            male += 1
-            val_gender[i] = 1
-        else:
-            female += 1
-            val_gender[i] = 0
+        gender = labels_dict[id]
+        val_gender[i] = gender
 
-    # @todo this is not equal to bar plot??
-    print(male)
-    print(female)
     np.save('./data/flickr8k_val_gender.npy', val_gender)
 
     return val_gender
