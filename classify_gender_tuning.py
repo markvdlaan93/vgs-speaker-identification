@@ -55,7 +55,7 @@ def cross_val(X_train, y_train):
     result = []
     for train_index, test_index in kf.split(X_train):
         for loss in ['hinge', 'log', 'perceptron', 'squared_hinge', 'modified_huber']:
-            for learning_rate in ['constant', 'optimal', 'invscaling']:
+            for learning_rate in ['optimal']:
                 fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
                 fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
 
