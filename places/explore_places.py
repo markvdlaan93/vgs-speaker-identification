@@ -22,9 +22,11 @@ def distribution():
 
     x_labels = list(range(1, len(counts) + 1))
 
+    print(len(x_labels))
+    exit()
+
     plt.bar(x_labels, y_labels, align='center')
     plt.xlabel('Speaker')
     plt.ylabel('Occurrences')
     plt.show()
 
-distribution()

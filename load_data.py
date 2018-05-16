@@ -39,5 +39,21 @@ def dataset_places():
     # Z-score MFCC vectors
     val_mfcc = (val_mfcc - val_mfcc.mean(axis=0)) / val_mfcc.std(axis=0)
 
+    ## Turn speaker set into numerical features instead of e.g. places_A1HWI4N1RJGKYY
+
+    # Construct dictionary for unique referencing
+    count = 0
+    val_spk_dict = {} # Note: length should be 85 like explore_places.distribution()
+    for speaker in val_spk:
+        if speaker not in val_spk_dict:
+            val_spk_dict[speaker] = count
+            count += 1
+
+    # Replace val_spk string values with built dictionary
+    count = 0
+    for speaker in val_spk:
+        val_spk[count] = val_spk_dict[speaker]
+        count += 1
+
     return val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc
 
