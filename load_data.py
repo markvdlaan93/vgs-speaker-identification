@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 ABS_PATH = '/Applications/MAMP/htdocs/master-thesis/'
 
@@ -54,6 +53,8 @@ def dataset_places():
     for speaker in val_spk:
         val_spk[count] = val_spk_dict[speaker]
         count += 1
+
+    val_spk = val_spk.astype(int)
 
     return val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc
 
