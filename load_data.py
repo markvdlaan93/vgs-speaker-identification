@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 
 ABS_PATH = '/Applications/MAMP/htdocs/master-thesis/'
 
@@ -34,6 +35,9 @@ def dataset_places():
     val_text = np.load(ABS_PATH + 'data/places_val_text.npy')
     # MFCC vector per speech signal with 37 coefficients => (1000,13) @todo normalize
     val_mfcc = np.load(ABS_PATH + 'data/places_val_mfcc.npy')
+
+    # Z-score MFCC vectors
+    val_mfcc = (val_mfcc - val_mfcc.mean(axis=0)) / val_mfcc.std(axis=0)
 
     return val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc
 
