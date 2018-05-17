@@ -1,6 +1,12 @@
 import numpy as np
 import sys
 sys.path.append('../')
+import load_data
+
+val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
+
+print(val_spk[0])
+exit()
 
 def labels_first_count():
     """
@@ -108,8 +114,7 @@ def load_txt_file():
         for line in lines:
             line = line.split()
             tag = line[0].split('-')[0]
-            print(tag)
-            exit()
+
 
 
 load_txt_file()

@@ -1,6 +1,6 @@
 import numpy as np
 
-ABS_PATH = '/Applications/MAMP/htdocs/master-thesis/'
+ABS_PATH = '/home/mark/Documents/htdocs/master-thesis/'
 
 def dataset():
     # Values of the activation functions (64 values per speech signal) => (5000,64)
@@ -52,10 +52,10 @@ def dataset_places():
     count = 0
     val_spk_int = np.zeros(val_spk.shape)
     for speaker in val_spk:
-        val_spk[count] = val_spk_dict[speaker]
+        val_spk_int[count] = val_spk_dict[speaker]
         count += 1
 
-    val_spk_int = val_spk.astype(int)
+    val_spk_int = val_spk_int.astype(int)
 
     return val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc
 
