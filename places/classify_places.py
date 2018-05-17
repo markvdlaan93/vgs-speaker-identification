@@ -9,7 +9,7 @@ import numpy as np
 
 N_SPLITS = 5
 
-val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset_places()
+val_conv, val_emb, val_rec, _, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
 
 def mfcc():
     """
@@ -27,7 +27,7 @@ def mfcc():
     Average F1-score over all folds is thus 0.879296248876749
     :return:
     """
-    cross_val(val_mfcc, val_spk)
+    cross_val(val_mfcc, val_spk_int)
 
 def conv():
     """
@@ -45,7 +45,7 @@ def conv():
     Average F1-score over all folds is thus 0.8735397358568735
     :return:
     """
-    cross_val(val_conv, val_spk)
+    cross_val(val_conv, val_spk_int)
 
 def rec_layers():
     """
@@ -109,7 +109,7 @@ def rec_layers():
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:, i, :]
-        X_train, _, y_train, _ = train_test_split(layer, val_spk, test_size=0.2, random_state=123)
+        X_train, _, y_train, _ = train_test_split(layer, val_spk_int, test_size=0.2, random_state=123)
 
         print("CV results for recurrent layer {}".format(i + 1))
         cross_val(X_train, y_train)
@@ -130,7 +130,7 @@ def emb():
     Average F1-score over all folds is thus 0.7953442812449355
     :return:
     """
-    cross_val(val_emb, val_spk)
+    cross_val(val_emb, val_spk_int)
 
 def cross_val(X_train, y_train):
     kf = KFold(n_splits=N_SPLITS, random_state=123)

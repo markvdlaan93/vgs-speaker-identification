@@ -50,11 +50,12 @@ def dataset_places():
 
     # Replace val_spk string values with built dictionary
     count = 0
+    val_spk_int = np.zeros(val_spk.shape)
     for speaker in val_spk:
         val_spk[count] = val_spk_dict[speaker]
         count += 1
 
-    val_spk = val_spk.astype(int)
+    val_spk_int = val_spk.astype(int)
 
-    return val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc
+    return val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc
 

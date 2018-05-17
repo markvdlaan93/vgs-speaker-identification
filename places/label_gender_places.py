@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import sys
 sys.path.append('../')
@@ -96,3 +95,21 @@ def labels_first_count():
         [ 85,    0]
     ])
 
+def load_txt_file():
+    """
+    Retrieve for every speaker one .wav file in order to label the gender
+    :return:
+    """
+    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
+    target_folder   = '/home/mark/Downloads/places_validation'
+    with open(file_path) as fp:
+        lines = fp.readlines()
+        result = []
+        for line in lines:
+            line = line.split()
+            tag = line[0].split('-')[0]
+            print(tag)
+            exit()
+
+
+load_txt_file()
