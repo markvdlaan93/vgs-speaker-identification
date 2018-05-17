@@ -2,11 +2,9 @@ import numpy as np
 import sys
 sys.path.append('../')
 import load_data
+from shutil import copy2
 
 val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
-
-print(val_spk[0])
-exit()
 
 def labels_first_count():
     """
@@ -21,7 +19,7 @@ def labels_first_count():
         [  5,    0],
         [  6,    0],
         [  7,    0],
-        [  8,    0]
+        [  8,    0],
         [  9,    0],
         [ 10,    0],
         [ 11,    0],
@@ -106,14 +104,36 @@ def load_txt_file():
     Retrieve for every speaker one .wav file in order to label the gender
     :return:
     """
+
+    # Strip off prefix 'places_'
+    val_spk_result = []
+    for speaker in val_spk:
+        val_spk_result.append(speaker.split('_')[1])
+
+    # Open file with utterances and check whether a certain entry belongs to the validation set
     file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
-    target_folder   = '/home/mark/Downloads/places_validation'
+    wav_path        = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
+    target_folder   = '/home/mark/Downloads/places_validation/'
+    validation_wav  = {}
     with open(file_path) as fp:
         lines = fp.readlines()
         result = []
         for line in lines:
             line = line.split()
             tag = line[0].split('-')[0]
+            # if tag in validation set than save the wav name and copy the file to another folder
+            if tag in val_spk_result and tag not in validation_wav.keys():
+                validation_wav[tag] = line[1]
+                try:
+                    copy2(wav_path + line[1], target_folder + line[1].split('/')[-1])
+                except FileNotFoundError as e:
+                    print(e)
+
+
+    # Amount of keys should be equal to counting label
+    assert labels_first_count().shape[0] == len(validation_wav.keys())
+
+
 
 
 
