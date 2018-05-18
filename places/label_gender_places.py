@@ -215,7 +215,20 @@ def fill_wav_manually(files_found, files_not_found):
 
     # Make sure that no mistakes are made
     len_after_assignment = len(manually_found.keys())
+    assert len_before_assignment == len_after_assignment
 
+    # Copy files to folder. This time without try-except block because files are guaranteed to be found
+    for key, value in manually_found.items():
+        # Don't copy speaker that cannot be found
+        if key != 'A1FZB94LK9HWBM':
+            copy_single_file(value)
+            files_found[key] = value.split('/')[-1]
+
+    # Create final npy file which indicates which wav I used for determining gender per speaker
+    final_result = np.zeros((len(files_found.keys), 2))
+    count = 0
+    for key, value in files_found.items():
+        final_result[count][0]
 
 def copy_single_file(value):
     """
