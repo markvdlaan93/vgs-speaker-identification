@@ -1,6 +1,6 @@
 import numpy as np
 
-ABS_PATH = '/home/mark/Documents/htdocs/master-thesis/'
+ABS_PATH = '/Applications/MAMP/htdocs/master-thesis/'
 
 def dataset():
     # Values of the activation functions (64 values per speech signal) => (5000,64)

@@ -3,8 +3,8 @@ import sys
 sys.path.append('../')
 import load_data
 from shutil import copy2
-from os.path import isdir
 import json
+import subprocess
 
 val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
 
@@ -240,4 +240,25 @@ def copy_single_file(value):
     copy2(file_path + value, target_folder + value.split('/')[-1])
 
 
-check_acl_val_file()
+def play_audio():
+    with open('../data/wav.txt') as file:
+        speakers = json.loads(file.read())
+
+    result = {}
+    file_folder = '/Applications/MAMP/htdocs/places_validation/'
+    for speaker, wav_file in speakers.items():
+        print("ID of is speaker: {}".format(speaker))
+        subprocess.check_call(["afplay", file_folder + wav_file])
+        while True:
+            gender = input("Please enter gender (0 = male, 1 = female): ")
+            if gender not in [0, 1]:
+                print('Please specify 0 or 1')
+            else:
+                result[speaker] = gender
+                break
+
+    return result
+
+
+
+play_audio()
