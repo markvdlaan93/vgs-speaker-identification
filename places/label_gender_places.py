@@ -99,6 +99,49 @@ def labels_first_count():
         [ 85,    0]
     ])
 
+def check_acl_val_file():
+    """
+    Function which examines the lists/acl_2017_val_uttids file
+    :return:
+    """
+    file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/lists/acl_2017_val_uttids'
+    full_lines  = []
+    keys        = []
+    with open(file_path) as fp:
+        lines = fp.readlines()
+        for line in lines:
+            key = line.split('-')[0]
+            if key not in keys:
+                full_lines.append(line.rstrip())
+                keys.append(key)
+
+    # Dictionary with structure: 'A1IFIK8J49WBER': 'A1IFIK8J49WBER-GSUN_E45F9E9AA12C1220B3510C539C6004FA'
+    # Key is used to check the key with val_spk while the value is used to find a specific wav file
+    keys_full_lines = dict(zip(keys, full_lines))
+
+    # Amount of keys should be equal to counting label
+    assert len(keys_full_lines.keys()) == labels_first_count().shape[0]
+
+    file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
+    wav_dict    = {}
+    with open(file_path) as fp:
+        lines = fp.readlines()
+        for line in lines:
+            parts   = line.split()
+            if parts[0] in keys_full_lines.values():
+                wav_dict[parts[0]] = parts[1]
+
+    # Make sure that the amount of wav paths is equal to
+    assert len(keys_full_lines.keys()) == len(wav_dict.keys())
+
+    # Copy wav file for each speaker to a seperated folder
+    target_folder   = '/home/mark/Downloads/places_validation/'
+    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
+    for key, value in wav_dict.items():
+        copy2(file_path + value, target_folder + value)
+
+
+
 def load_txt_file():
     """
     Retrieve for every speaker one .wav file in order to label the gender
@@ -111,23 +154,17 @@ def load_txt_file():
         val_spk_result.append(speaker.split('_')[1])
 
     # Open file with utterances and check whether a certain entry belongs to the validation set
-    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
+    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/lists/acl_2017_val_uttids'
     wav_path        = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     target_folder   = '/home/mark/Downloads/places_validation/'
     validation_wav  = {}
     with open(file_path) as fp:
         lines = fp.readlines()
-        result = []
         for line in lines:
-            line = line.split()
-            tag = line[0].split('-')[0]
+            tag = line.split('-')[0]
             # if tag in validation set than save the wav name and copy the file to another folder
             if tag in val_spk_result and tag not in validation_wav.keys():
-                validation_wav[tag] = line[1]
-                try:
-                    copy2(wav_path + line[1], target_folder + line[1].split('/')[-1])
-                except FileNotFoundError as e:
-                    print(e)
+                validation_wav[tag] = ''
 
 
     # Amount of keys should be equal to counting label
@@ -136,5 +173,4 @@ def load_txt_file():
 
 
 
-
-load_txt_file()
+check_acl_val_file()
