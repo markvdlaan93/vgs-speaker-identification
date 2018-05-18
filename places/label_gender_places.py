@@ -137,8 +137,18 @@ def check_acl_val_file():
     # Copy wav file for each speaker to a seperated folder
     target_folder   = '/home/mark/Downloads/places_validation/'
     file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
+    count_not_found = 0
+    files_not_found = {}
     for key, value in wav_dict.items():
-        copy2(file_path + value, target_folder + value)
+        # For some reason, some wav files aren't in the zip file
+        try:
+            copy2(file_path + value, target_folder + value.split('/')[-1])
+        except FileNotFoundError as e:
+            print('File {} not found'.format(value))
+            count_not_found += 1
+            files_not_found[key] = value
+
+    print('Amount of files not found: {}'.format(count_not_found))
 
 
 
