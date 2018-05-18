@@ -4,6 +4,7 @@ sys.path.append('../')
 import load_data
 from shutil import copy2
 from os.path import isdir
+import json
 
 val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
 
@@ -146,14 +147,13 @@ def check_acl_val_file():
         try:
             copy2(file_path + value, target_folder + value.split('/')[-1])
         except FileNotFoundError as e:
-            print('File {} not found'.format(value))
             count_not_found += 1
             files_not_found[key] = value
 
         files_found[key.split('-')[0]] = value.split('/')[-1]
 
     # 34 wav files weren't found
-    print('Amount of files not found: {}'.format(count_not_found))
+    # print('Amount of files not found: {}'.format(count_not_found))
 
     fill_wav_manually(files_found, files_not_found)
 
@@ -224,11 +224,10 @@ def fill_wav_manually(files_found, files_not_found):
             copy_single_file(value)
             files_found[key] = value.split('/')[-1]
 
-    # Create final npy file which indicates which wav I used for determining gender per speaker
-    final_result = np.zeros((len(files_found.keys), 2))
-    count = 0
-    for key, value in files_found.items():
-        final_result[count][0]
+    # Create final json file which indicates which wav I used for determining gender per speaker
+    with open('../data/wav.txt', 'w') as file:
+        # Reverse with json.loads()
+        file.write(json.dumps(files_found))
 
 def copy_single_file(value):
     """
@@ -239,41 +238,6 @@ def copy_single_file(value):
     file_path = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     target_folder = '/home/mark/Downloads/places_validation/'
     copy2(file_path + value, target_folder + value.split('/')[-1])
-
-def load_txt_file():
-    """
-    Retrieve for every speaker one .wav file in order to label the gender
-    :return:
-    """
-
-    # Strip off prefix 'places_'
-    val_spk_result = []
-    for speaker in val_spk:
-        val_spk_result.append(speaker.split('_')[1])
-
-    # Open file with utterances and check whether a certain entry belongs to the validation set
-    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
-    wav_path        = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
-    target_folder   = '/home/mark/Downloads/places_validation/'
-    validation_wav  = {}
-    with open(file_path) as fp:
-        lines = fp.readlines()
-        result = []
-        for line in lines:
-            line = line.split()
-            tag = line[0].split('-')[0]
-            # if tag in validation set than save the wav name and copy the file to another folder
-            if tag in val_spk_result and \
-                    tag not in validation_wav.keys() and \
-                    isdir(wav_path + 'wavs/' + line[1].split('/')[1]):
-                validation_wav[tag] = line[1]
-                copy2(wav_path + line[1], target_folder + line[1].split('/')[-1])
-
-
-    # Amount of keys should be equal to counting label
-    assert labels_first_count().shape[0] == len(validation_wav.keys())
-
-
 
 
 check_acl_val_file()
