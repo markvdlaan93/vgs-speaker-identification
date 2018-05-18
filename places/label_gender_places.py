@@ -134,11 +134,12 @@ def check_acl_val_file():
     # Make sure that the amount of wav paths is equal to
     assert len(keys_full_lines.keys()) == len(wav_dict.keys())
 
-    # Copy wav file for each speaker to a seperated folder
+    # Copy wav file for each speaker to a separate folder
     target_folder   = '/home/mark/Downloads/places_validation/'
     file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     count_not_found = 0
     files_not_found = {}
+    wav_file        = {}
     for key, value in wav_dict.items():
         # For some reason, some wav files aren't in the zip file
         try:
@@ -148,7 +149,17 @@ def check_acl_val_file():
             count_not_found += 1
             files_not_found[key] = value
 
+        wav_file[key.split('-')[0]] = value.split('/')[-1]
+
+    # 34 wav files weren't found
     print('Amount of files not found: {}'.format(count_not_found))
+
+    fill_wav_manually(wav_file, files_not_found)
+
+def fill_wav_manually(wav_file, files_not_found):
+    """
+    For not found files, pick another wav file by hand (programmatically no success)
+    """
 
 
 
