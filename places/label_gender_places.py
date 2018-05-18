@@ -160,8 +160,19 @@ def fill_wav_manually(wav_file, files_not_found):
     """
     For not found files, pick another wav file by hand (programmatically no success)
     """
+    # print(files_not_found)
+    print(wav_file)
+    exit()
 
-
+def copy_single_file(value):
+    """
+    Function for copying a single file
+    :param value:
+    :return:
+    """
+    file_path = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
+    target_folder = '/home/mark/Downloads/places_validation/'
+    copy2(file_path + value, target_folder + value.split('/')[-1])
 
 def load_txt_file():
     """
