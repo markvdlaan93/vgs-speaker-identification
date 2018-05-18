@@ -3,6 +3,7 @@ import sys
 sys.path.append('../')
 import load_data
 from shutil import copy2
+from os.path import isdir
 
 val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
 
@@ -123,13 +124,17 @@ def check_acl_val_file():
     assert len(keys_full_lines.keys()) == labels_first_count().shape[0]
 
     file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
+    wav_path    = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/wavs/'
     wav_dict    = {}
     with open(file_path) as fp:
         lines = fp.readlines()
         for line in lines:
             parts   = line.split()
+            # Some folders aren't in the zip for some reason. Therefore, check whether folder exists
+            folder = parts[1].split('/')[1]
             if parts[0] in keys_full_lines.values():
-                wav_dict[parts[0]] = parts[1]
+                if isdir(wav_path + folder):
+                    wav_dict[parts[0]] = parts[1]
 
     # Make sure that the amount of wav paths is equal to
     assert len(keys_full_lines.keys()) == len(wav_dict.keys())
@@ -139,7 +144,7 @@ def check_acl_val_file():
     file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     count_not_found = 0
     files_not_found = {}
-    wav_file        = {}
+    files_found        = {}
     for key, value in wav_dict.items():
         # For some reason, some wav files aren't in the zip file
         try:
@@ -149,20 +154,18 @@ def check_acl_val_file():
             count_not_found += 1
             files_not_found[key] = value
 
-        wav_file[key.split('-')[0]] = value.split('/')[-1]
+        files_found[key.split('-')[0]] = value.split('/')[-1]
 
     # 34 wav files weren't found
     print('Amount of files not found: {}'.format(count_not_found))
 
-    fill_wav_manually(wav_file, files_not_found)
+    # fill_wav_manually(files_found, files_not_found)
 
-def fill_wav_manually(wav_file, files_not_found):
+def fill_wav_manually(files_found, files_not_found):
     """
     For not found files, pick another wav file by hand (programmatically no success)
     """
-    # print(files_not_found)
-    print(wav_file)
-    exit()
+    # files_found['A1E1FGA9HQUGQ7'] =
 
 def copy_single_file(value):
     """
