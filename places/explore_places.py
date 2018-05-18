@@ -1,4 +1,6 @@
-# import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 import numpy as np
 import sys
 sys.path.append('../')
@@ -42,5 +44,6 @@ def distribution_gender():
     plt.xticks([0, 1], ['Male', 'Female'])
     plt.savefig('../img/places/male_female_distribution.png')
     plt.show()
+
 
 distribution_gender()
