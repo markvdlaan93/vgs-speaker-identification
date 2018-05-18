@@ -251,7 +251,7 @@ def play_audio():
         subprocess.check_call(["afplay", file_folder + wav_file])
         while True:
             gender = input("Please enter gender (0 = male, 1 = female): ")
-            if gender not in [0, 1]:
+            if gender not in ['0', '1']:
                 print('Please specify 0 or 1')
             else:
                 result[speaker] = gender
