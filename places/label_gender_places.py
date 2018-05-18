@@ -240,25 +240,35 @@ def copy_single_file(value):
     copy2(file_path + value, target_folder + value.split('/')[-1])
 
 
-def play_audio():
+def play_audio(file_name):
+    """
+    Play all wav tracks and determine whether it is a male or female that is talking
+    :return:
+    """
     with open('../data/wav.txt') as file:
         speakers = json.loads(file.read())
 
     result = {}
     file_folder = '/Applications/MAMP/htdocs/places_validation/'
     for speaker, wav_file in speakers.items():
-        print("ID of is speaker: {}".format(speaker))
-        subprocess.check_call(["afplay", file_folder + wav_file])
-        while True:
-            gender = input("Please enter gender (0 = male, 1 = female): ")
-            if gender not in ['0', '1']:
-                print('Please specify 0 or 1')
-            else:
-                result[speaker] = gender
-                break
+        if speaker != 'A1FZB94LK9HWBM':
+            print("ID of is speaker: {}".format(speaker))
+            subprocess.check_call(["afplay", file_folder + wav_file])
+            # Doubt: A143W5J0USUJWX
+            while True:
+                gender = input("Please enter gender (0 = male, 1 = female): ")
+                if gender not in ['0', '1']:
+                    print('Please specify 0 or 1')
+                else:
+                    result[speaker] = gender
+                    break
 
-    return result
+    print(result)
+
+    with open(file_name, 'w') as file:
+        # Reverse with json.loads()
+        file.write(json.dumps(result))
 
 
 
-play_audio()
+play_audio('../data/speaker_gender_second_count.txt')
