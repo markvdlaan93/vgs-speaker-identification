@@ -254,7 +254,7 @@ def play_audio(file_name):
         if speaker != 'A1FZB94LK9HWBM':
             print("ID of is speaker: {}".format(speaker))
             subprocess.check_call(["afplay", file_folder + wav_file])
-            # Doubt: A143W5J0USUJWX
+            # @todo Doubt: A143W5J0USUJWX
             while True:
                 gender = input("Please enter gender (0 = male, 1 = female): ")
                 if gender not in ['0', '1']:
@@ -270,5 +270,34 @@ def play_audio(file_name):
         file.write(json.dumps(result))
 
 
+def check_frequency_missing_speaker():
+    """
+    There is a single speaker which is missing. This function checks how many times this speaker occurs in val_spk.
+    :return:
+    """
+    speaker = 'A1FZB94LK9HWBM'
+    count = 0
+    for val_speaker in val_spk:
+        if val_speaker.split('_')[1] == speaker:
+            count += 1
 
-play_audio('../data/speaker_gender_second_count.txt')
+    return count
+
+
+def create_val_gender(file_name):
+    with open(file_name) as file:
+        speaker_genders = json.loads(file.read())
+
+    # Fill val_gender by checking the dictionary which contains the gender as value
+    val_gender = np.zeros(val_spk.shape)
+    count = 0
+    for _ in val_gender:
+        speaker = val_spk[count]
+        if speaker.split('_')[1] != 'A1FZB94LK9HWBM':
+            val_gender[count] = speaker_genders[speaker.split('_')[1]]
+        count += 1
+
+    np.save('../data/places_val_gender.npy', val_gender)
+
+#print(check_frequency_missing_speaker())
+create_val_gender('../data/speaker_gender_first_count.txt')
