@@ -300,4 +300,4 @@ def create_val_gender(file_name):
     np.save('../data/places_val_gender.npy', val_gender)
 
 #print(check_frequency_missing_speaker())
-create_val_gender('../data/speaker_gender_first_count.txt')
+#create_val_gender('../data/speaker_gender_first_count.txt')

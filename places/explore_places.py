@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import sys
 sys.path.append('../')
@@ -6,7 +6,9 @@ sys.path.append('../')
 import load_data
 import majority
 
-val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset_places()
+val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
+
+val_gender = np.load('../data/places_val_gender.npy')
 
 def distribution():
     total = 0
@@ -27,3 +29,18 @@ def distribution():
     plt.ylabel('Occurrences')
     plt.show()
 
+def distribution_gender():
+    male    = 0
+    female  = 0
+    for gender in val_gender:
+        if gender:
+            male += 1
+        else:
+            female += 1
+
+    plt.bar([0, 1], [male, female], align='center')
+    plt.xticks([0, 1], ['Male', 'Female'])
+    plt.savefig('../img/places/male_female_distribution.png')
+    plt.show()
+
+distribution_gender()
