@@ -124,17 +124,13 @@ def check_acl_val_file():
     assert len(keys_full_lines.keys()) == labels_first_count().shape[0]
 
     file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
-    wav_path    = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/wavs/'
     wav_dict    = {}
     with open(file_path) as fp:
         lines = fp.readlines()
         for line in lines:
             parts   = line.split()
-            # Some folders aren't in the zip for some reason. Therefore, check whether folder exists
-            folder = parts[1].split('/')[1]
             if parts[0] in keys_full_lines.values():
-                if isdir(wav_path + folder):
-                    wav_dict[parts[0]] = parts[1]
+                wav_dict[parts[0]] = parts[1]
 
     # Make sure that the amount of wav paths is equal to
     assert len(keys_full_lines.keys()) == len(wav_dict.keys())
@@ -144,7 +140,7 @@ def check_acl_val_file():
     file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     count_not_found = 0
     files_not_found = {}
-    files_found        = {}
+    files_found     = {}
     for key, value in wav_dict.items():
         # For some reason, some wav files aren't in the zip file
         try:
@@ -159,13 +155,67 @@ def check_acl_val_file():
     # 34 wav files weren't found
     print('Amount of files not found: {}'.format(count_not_found))
 
-    # fill_wav_manually(files_found, files_not_found)
+    fill_wav_manually(files_found, files_not_found)
 
 def fill_wav_manually(files_found, files_not_found):
     """
     For not found files, pick another wav file by hand (programmatically no success)
     """
-    # files_found['A1E1FGA9HQUGQ7'] =
+
+    # A single dictionary in order to easily copy the files to the other folder
+    manually_found = {}
+    for key, value in files_not_found.items():
+        manually_found[key.split('-')[0]] = ''
+
+    len_before_assignment = len(manually_found.keys())
+
+    manually_found['A15PYQVCGSES3G'] = 'wavs/28/utterance_346059.wav'
+    manually_found['A1AEFJMOP7OZYS'] = 'wavs/64/utterance_62827.wav'
+    manually_found['A1A9OMCBJQL15S'] = 'wavs/430/utterance_208307.wav'
+    manually_found['A1C2T79XTDHE39'] = 'wavs/4/utterance_168895.wav'
+
+    manually_found['A15SDWY3P1WQX6'] = 'wavs/36/utterance_41826.wav'
+    manually_found['A1APC1HPGOLX2F'] = 'wavs/138/utterance_157534.wav'
+    manually_found['A1DEJWBNA5OUX1'] = 'wavs/150/utterance_40840.wav'
+    manually_found['A1JBLFP5IB5UF8'] = 'wavs/48/utterance_326238.wav'
+
+    manually_found['A1J7X0XSDTJGGP'] = 'wavs/35/utterance_374031.wav'
+    manually_found['A1GGWQQFBNCUEV'] = 'wavs/246/utterance_296199.wav'
+    manually_found['A191H6ZEZ9I7M3'] = 'wavs/148/utterance_381212.wav'
+    # Only found a single entry in utt2wav but the folder isn't available in /wavs
+    manually_found['A1FZB94LK9HWBM'] = ''
+
+    manually_found['A1EPEMSYY5Q6GF'] = 'wavs/443/utterance_233011.wav'
+    manually_found['A1C5S8FZ0UGYZX'] = 'wavs/28/utterance_240707.wav'
+    manually_found['A14WOX09KHZYI8'] = 'wavs/437/utterance_202569.wav'
+    manually_found['A1IQL2UN4FAMF1'] = 'wavs/406/utterance_273962.wav'
+
+    manually_found['A1J2SQGWOID8SZ'] = 'wavs/1/utterance_162028.wav'
+    manually_found['A1CJM3ULFBWN1E'] = 'wavs/232/utterance_251723.wav'
+    manually_found['A1HWI4N1RJGKYY'] = 'wavs/461/utterance_306142.wav'
+    manually_found['A111MNQPYBOPD0'] = 'wavs/173/utterance_177556.wav'
+
+    manually_found['A03015341AB6VCX61DKN7'] = 'wavs/52/utterance_282287.wav'
+    manually_found['A17DY4MQFC4L26'] = 'wavs/103/utterance_45148.wav'
+    manually_found['A1K8U4ERJCTIQ5'] = 'wavs/422/utterance_239162.wav'
+    manually_found['A1E48YYO7XP92J'] = 'wavs/260/utterance_238678.wav'
+
+    manually_found['A116P6269SII5Y'] = 'wavs/356/utterance_231366.wav'
+    manually_found['A1CDWT7K9N097'] = 'wavs/150/utterance_238251.wav'
+    manually_found['A1HGH370WWDHKN'] = 'wavs/321/utterance_198460.wav'
+    manually_found['A11R8G0FYA2UVQ'] = 'wavs/284/utterance_229375.wav'
+
+    manually_found['A1A6D2RDPGVX5F'] = 'wavs/272/utterance_173256.wav'
+    manually_found['A17XJC8D0QB95H'] = 'wavs/253/utterance_217783.wav'
+    manually_found['A1AHYAWHM0ML7H'] = 'wavs/117/utterance_143623.wav'
+    manually_found['A174D7OUJ9GKZT'] = 'wavs/389/utterance_94079.wav'
+
+    manually_found['A1E1FGA9HQUGQ7'] = 'wavs/204/utterance_318628.wav'
+    manually_found['A1AF8W1Q93TODD'] = 'wavs/63/utterance_78398.wav'
+
+    # Make sure that no mistakes are made
+    len_after_assignment = len(manually_found.keys())
+
 
 def copy_single_file(value):
     """
@@ -189,17 +239,22 @@ def load_txt_file():
         val_spk_result.append(speaker.split('_')[1])
 
     # Open file with utterances and check whether a certain entry belongs to the validation set
-    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/lists/acl_2017_val_uttids'
+    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
     wav_path        = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     target_folder   = '/home/mark/Downloads/places_validation/'
     validation_wav  = {}
     with open(file_path) as fp:
         lines = fp.readlines()
+        result = []
         for line in lines:
-            tag = line.split('-')[0]
+            line = line.split()
+            tag = line[0].split('-')[0]
             # if tag in validation set than save the wav name and copy the file to another folder
-            if tag in val_spk_result and tag not in validation_wav.keys():
-                validation_wav[tag] = ''
+            if tag in val_spk_result and \
+                    tag not in validation_wav.keys() and \
+                    isdir(wav_path + 'wavs/' + line[1].split('/')[1]):
+                validation_wav[tag] = line[1]
+                copy2(wav_path + line[1], target_folder + line[1].split('/')[-1])
 
 
     # Amount of keys should be equal to counting label
