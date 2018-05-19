@@ -65,14 +65,22 @@ def dataset_places_gender():
             indices.append(count)
         count += 1
 
-    # Now that we have the indices, remove them from all relevant datasets
+    ## Now that we have the indices, remove them from all relevant datasets
     val_conv   = np.delete(val_conv, indices, 0)
     val_emb    = np.delete(val_emb, indices, 0)
     val_mfcc   = np.delete(val_mfcc, indices, 0)
     val_gender = np.delete(val_gender, indices, 0)
 
+    # Make sure recurrent layers are also formatted
+    amount_layers  = val_rec.shape[1]
+    val_rec_result = np.zeros((val_rec.shape[0] - len(indices), val_rec.shape[1], val_rec.shape[2]))
+    for i in range(amount_layers):
+        layer = val_rec[:, i, :]
+        layer = np.delete(layer, indices, 0)
+        val_rec_result[:, i, :] = layer
+
     # Make sure all datasets are of equal length
-    assert val_conv.shape[0] == val_emb.shape[0] == val_mfcc.shape[0] == val_gender.shape[0]
+    assert val_conv.shape[0] == val_emb.shape[0] == val_mfcc.shape[0] == val_gender.shape[0] == val_rec_result.shape[0]
 
     return val_conv, val_emb, val_rec, val_mfcc, val_gender
 
