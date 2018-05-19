@@ -9,9 +9,7 @@ import numpy as np
 
 N_SPLITS = 5
 
-val_conv, val_emb, val_rec, _, _, _, val_mfcc = load_data.dataset_places()
-
-val_gender = np.load('../data/places_val_gender.npy')
+val_conv, val_emb, val_rec, val_mfcc, val_gender = load_data.dataset_places_gender()
 
 def mfcc():
     cross_val(val_mfcc, val_gender)

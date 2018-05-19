@@ -8,6 +8,12 @@ import subprocess
 
 val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data.dataset_places()
 
+## Constants
+FILE_PATH_PLACES_ROOT = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
+FILE_PATH_UTTIDS  = FILE_PATH_PLACES_ROOT + 'lists/acl_2017_val_uttids'
+FILE_PATH_UTT2WAV = FILE_PATH_PLACES_ROOT + 'metadata/utt2wav'
+TARGET_FOLDER     = '/home/mark/Downloads/places_validation/'
+
 def labels_first_count():
     """
     Label gender in the Flickr8K audio caption corpus, Male = 0, Female = 1.
@@ -106,10 +112,9 @@ def check_acl_val_file():
     Function which examines the lists/acl_2017_val_uttids file
     :return:
     """
-    file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/lists/acl_2017_val_uttids'
     full_lines  = []
     keys        = []
-    with open(file_path) as fp:
+    with open(FILE_PATH_UTTIDS) as fp:
         lines = fp.readlines()
         for line in lines:
             key = line.split('-')[0]
@@ -124,9 +129,8 @@ def check_acl_val_file():
     # Amount of keys should be equal to counting label
     assert len(keys_full_lines.keys()) == labels_first_count().shape[0]
 
-    file_path   = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/metadata/utt2wav'
     wav_dict    = {}
-    with open(file_path) as fp:
+    with open(FILE_PATH_UTT2WAV) as fp:
         lines = fp.readlines()
         for line in lines:
             parts   = line.split()
@@ -137,15 +141,13 @@ def check_acl_val_file():
     assert len(keys_full_lines.keys()) == len(wav_dict.keys())
 
     # Copy wav file for each speaker to a separate folder
-    target_folder   = '/home/mark/Downloads/places_validation/'
-    file_path       = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
     count_not_found = 0
     files_not_found = {}
     files_found     = {}
     for key, value in wav_dict.items():
         # For some reason, some wav files aren't in the zip file
         try:
-            copy2(file_path + value, target_folder + value.split('/')[-1])
+            copy2(FILE_PATH_PLACES_ROOT + value, TARGET_FOLDER + value.split('/')[-1])
         except FileNotFoundError as e:
             count_not_found += 1
             files_not_found[key] = value
@@ -201,7 +203,7 @@ def fill_wav_manually(files_found, files_not_found):
     manually_found['A1E48YYO7XP92J'] = 'wavs/260/utterance_238678.wav'
 
     manually_found['A116P6269SII5Y'] = 'wavs/356/utterance_231366.wav'
-    manually_found['A1CDWT7K9N097'] = 'wavs/150/utterance_238251.wav'
+    manually_found['A1CDWT7K9N097']  = 'wavs/150/utterance_238251.wav'
     manually_found['A1HGH370WWDHKN'] = 'wavs/321/utterance_198460.wav'
     manually_found['A11R8G0FYA2UVQ'] = 'wavs/284/utterance_229375.wav'
 
@@ -235,9 +237,7 @@ def copy_single_file(value):
     :param value:
     :return:
     """
-    file_path = '/home/mark/Downloads/placesaudio_distro_part_1/placesaudio_distro_part_1/'
-    target_folder = '/home/mark/Downloads/places_validation/'
-    copy2(file_path + value, target_folder + value.split('/')[-1])
+    copy2(FILE_PATH_PLACES_ROOT + value, TARGET_FOLDER + value.split('/')[-1])
 
 
 def play_audio(file_name):

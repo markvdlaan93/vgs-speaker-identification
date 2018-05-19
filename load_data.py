@@ -114,4 +114,3 @@ def speaker_string_to_int(val_spk):
 
     return val_spk_int.astype(int)
 
-dataset_places_gender()
