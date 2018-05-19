@@ -46,4 +46,4 @@ def distribution_gender():
     plt.show()
 
 
-distribution_gender()
+distribution()

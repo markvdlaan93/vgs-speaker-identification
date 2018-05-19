@@ -24,6 +24,12 @@ def majority_places(val_spk):
     :param val_spk:
     :return:
     """
-    return collections.Counter(val_spk)
+
+    counts = collections.Counter(val_spk)
+
+    # Majority baseline is 0.362
+    print("Majority baseline is {}".format(max(counts.values()) / val_spk.shape[0]))
+
+    return counts
 
 
