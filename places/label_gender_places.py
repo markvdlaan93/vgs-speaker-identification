@@ -319,4 +319,4 @@ def compare_rounds(file_first_round, file_second_round):
         if gender_first_round[key] != value:
             print('{} is not the same'.format(key))
 
-create_val_gender('../data/speaker_gender_second_count.txt')
+play_audio('../data/speaker_gender_second_count.txt')
