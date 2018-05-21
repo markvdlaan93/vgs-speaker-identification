@@ -13,6 +13,10 @@ val_conv, val_emb, val_rec, val_spk, val_spk_int, val_text, val_mfcc = load_data
 val_gender = np.load('../data/places_val_gender.npy')
 
 def distribution():
+    """
+    Show distribution of speakers
+    :return:
+    """
     total = 0
     counts = majority.majority_places(val_spk)
 
@@ -32,6 +36,10 @@ def distribution():
     plt.show()
 
 def distribution_gender():
+    """
+    Display distribution between males and females in the places dataset based on manual labeling.
+    :return:
+    """
     male    = 0
     female  = 0
     for gender in val_gender:
@@ -46,4 +54,3 @@ def distribution_gender():
     plt.show()
 
 
-distribution_gender()

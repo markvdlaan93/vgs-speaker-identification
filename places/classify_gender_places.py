@@ -12,12 +12,102 @@ N_SPLITS = 5
 val_conv, val_emb, val_rec, val_mfcc, val_gender = load_data.dataset_places_gender()
 
 def mfcc():
+    """
+    F1-score for fold 1 is 0.9000100010001
+    Accuracy score for fold 1 is 0.9
+    F1-score for fold 2 is 0.8894223046030275
+    Accuracy score for fold 2 is 0.89
+    F1-score for fold 3 is 0.8999699729756782
+    Accuracy score for fold 3 is 0.9
+    F1-score for fold 4 is 0.8807096171802055
+    Accuracy score for fold 4 is 0.88
+    F1-score for fold 5 is 0.9246615721909464
+    Accuracy score for fold 5 is 0.9246231155778895
+    Average accuracy over all folds is thus 0.8989246231155779
+    Average F1-score over all folds is thus 0.8989546935899915
+
+    :return:
+    """
     cross_val(val_mfcc, val_gender)
 
 def conv():
+    """
+    F1-score for fold 1 is 0.8596634615384616
+    Accuracy score for fold 1 is 0.86
+    F1-score for fold 2 is 0.9
+    Accuracy score for fold 2 is 0.9
+    F1-score for fold 3 is 0.8396153846153847
+    Accuracy score for fold 3 is 0.84
+    F1-score for fold 4 is 0.8955321084227761
+    Accuracy score for fold 4 is 0.895
+    F1-score for fold 5 is 0.8593675447946805
+    Accuracy score for fold 5 is 0.8592964824120602
+    Average accuracy over all folds is thus 0.870859296482412
+    Average F1-score over all folds is thus 0.8708356998742606
+
+    :return:
+    """
     cross_val(val_conv, val_gender)
 
 def rec_layers():
+    """
+    CV results for recurrent layer 1
+    F1-score for fold 1 is 0.9749435847840104
+    Accuracy score for fold 1 is 0.975
+    F1-score for fold 2 is 0.9687512207508104
+    Accuracy score for fold 2 is 0.96875
+    F1-score for fold 3 is 0.9688205753001308
+    Accuracy score for fold 3 is 0.96875
+    F1-score for fold 4 is 0.9686794246998692
+    Accuracy score for fold 4 is 0.96875
+    F1-score for fold 5 is 0.9748068283917339
+    Accuracy score for fold 5 is 0.9748427672955975
+    Average accuracy over all folds is thus 0.9712185534591196
+    Average F1-score over all folds is thus 0.971200326785311
+
+    CV results for recurrent layer 2
+    F1-score for fold 1 is 0.9812296449680351
+    Accuracy score for fold 1 is 0.98125
+    F1-score for fold 2 is 0.9562448712437966
+    Accuracy score for fold 2 is 0.95625
+    F1-score for fold 3 is 0.956348805420183
+    Accuracy score for fold 3 is 0.95625
+    F1-score for fold 4 is 0.949928786200348
+    Accuracy score for fold 4 is 0.95
+    F1-score for fold 5 is 0.9559329423123015
+    Accuracy score for fold 5 is 0.9559748427672956
+    Average accuracy over all folds is thus 0.9599449685534591
+    Average F1-score over all folds is thus 0.959937010028933
+
+    CV results for recurrent layer 3
+    F1-score for fold 1 is 0.9749435847840104
+    Accuracy score for fold 1 is 0.975
+    F1-score for fold 2 is 0.9562517090511349
+    Accuracy score for fold 2 is 0.95625
+    F1-score for fold 3 is 0.9625595238095238
+    Accuracy score for fold 3 is 0.9625
+    F1-score for fold 4 is 0.9437122199834065
+    Accuracy score for fold 4 is 0.94375
+    F1-score for fold 5 is 0.9496136567834682
+    Accuracy score for fold 5 is 0.949685534591195
+    Average accuracy over all folds is thus 0.957437106918239
+    Average F1-score over all folds is thus 0.9574161388823088
+
+    CV results for recurrent layer 4
+    F1-score for fold 1 is 0.9874717923920052
+    Accuracy score for fold 1 is 0.9875
+    F1-score for fold 2 is 0.943717008797654
+    Accuracy score for fold 2 is 0.94375
+    F1-score for fold 3 is 0.9438770355402353
+    Accuracy score for fold 3 is 0.94375
+    F1-score for fold 4 is 0.9374109827504352
+    Accuracy score for fold 4 is 0.9375
+    F1-score for fold 5 is 0.9307517664907597
+    Accuracy score for fold 5 is 0.9308176100628931
+    Average accuracy over all folds is thus 0.9486635220125785
+    Average F1-score over all folds is thus 0.948645717194218
+    :return:
+    """
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:, i, :]
@@ -27,6 +117,22 @@ def rec_layers():
         cross_val(X_train, y_train)
 
 def emb():
+    """
+    F1-score for fold 1 is 0.9299439102564102
+    Accuracy score for fold 1 is 0.93
+    F1-score for fold 2 is 0.925051564767895
+    Accuracy score for fold 2 is 0.925
+    F1-score for fold 3 is 0.9499849864878391
+    Accuracy score for fold 3 is 0.95
+    F1-score for fold 4 is 0.9450619905113891
+    Accuracy score for fold 4 is 0.945
+    F1-score for fold 5 is 0.9347066958988202
+    Accuracy score for fold 5 is 0.9346733668341709
+    Average accuracy over all folds is thus 0.936934673366834
+    Average F1-score over all folds is thus 0.9369498295844707
+
+    :return:
+    """
     cross_val(val_emb, val_gender)
 
 def cross_val(X_train, y_train):
@@ -54,7 +160,3 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
-mfcc()
-conv()
-rec_layers()
-emb()

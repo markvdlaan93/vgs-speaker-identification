@@ -56,7 +56,7 @@ def dataset_places_gender():
 
     val_mfcc = zscore_mfcc(val_mfcc)
 
-    ## Filter rows. It is only a single speaker that needs to be removed. So it is no problem to hardcode the speaker
+    # Filter rows. It is only a single speaker that needs to be removed. So it is no problem to hardcode the speaker
     speaker = 'A1FZB94LK9HWBM'
     indices = []
     count   = 0
@@ -82,7 +82,7 @@ def dataset_places_gender():
     # Make sure all datasets are of equal length
     assert val_conv.shape[0] == val_emb.shape[0] == val_mfcc.shape[0] == val_gender.shape[0] == val_rec_result.shape[0]
 
-    return val_conv, val_emb, val_rec, val_mfcc, val_gender
+    return val_conv, val_emb, val_rec_result, val_mfcc, val_gender
 
 def zscore_mfcc(val_mfcc):
     """
