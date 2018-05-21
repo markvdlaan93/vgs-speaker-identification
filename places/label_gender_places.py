@@ -254,7 +254,6 @@ def play_audio(file_name):
         if speaker != 'A1FZB94LK9HWBM':
             print("ID of is speaker: {}".format(speaker))
             subprocess.check_call(["afplay", file_folder + wav_file])
-            # @todo Doubt: A143W5J0USUJWX
             while True:
                 gender = input("Please enter gender (0 = male, 1 = female): ")
                 if gender not in ['0', '1']:
@@ -299,5 +298,25 @@ def create_val_gender(file_name):
 
     np.save('../data/places_val_gender.npy', val_gender)
 
-#print(check_frequency_missing_speaker())
-#create_val_gender('../data/speaker_gender_first_count.txt')
+def compare_rounds(file_first_round, file_second_round):
+    """
+    A function to compare the results between the different rounds of classifying gender.
+    :param file_first_round:
+    :param file_second_round:
+    :return:
+    """
+    with open(file_first_round) as file:
+        gender_first_round = json.loads(file.read())
+
+    with open(file_second_round) as file:
+        gender_second_round = json.loads(file.read())
+
+    # Both dictionaries should be of equal length
+    assert len(gender_first_round.keys()) == len(gender_second_round.keys())
+
+    # Check whether there is any mismatch
+    for key, value in gender_second_round.items():
+        if gender_first_round[key] != value:
+            print('{} is not the same'.format(key))
+
+create_val_gender('../data/speaker_gender_second_count.txt')
