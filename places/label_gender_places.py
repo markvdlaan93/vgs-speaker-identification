@@ -238,4 +238,26 @@ def compare_rounds(file_first_round, file_second_round):
         if gender_first_round[key] != value:
             print('{} is not the same'.format(key))
 
-create_val_gender('../data/speaker_gender_second_count.txt')
+
+def distribution_male_female(file_name):
+    """
+    Contrary to explores_places.py this function counts the amount of male and female speakers (not the number of
+    entries)
+    :param file_name file with gender per speaker:
+    :return:
+    """
+    with open(file_name) as file:
+        gender_speaker = json.loads(file.read())
+
+    male   = 0
+    female = 0
+    for key, value in gender_speaker.items():
+        if value == "0":
+            male += 1
+        else:
+            female += 1
+
+    return male, female
+
+
+# print(distribution_male_female('../data/speaker_gender_second_count.txt'))

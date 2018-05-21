@@ -40,6 +40,9 @@ def distribution_gender():
     Display distribution between males and females in the places dataset based on manual labeling.
     :return:
     """
+
+    _, _, _, _, val_gender = load_data.dataset_places_gender()
+
     male    = 0
     female  = 0
     for gender in val_gender:
@@ -54,3 +57,4 @@ def distribution_gender():
     plt.show()
 
 
+# distribution_gender()
