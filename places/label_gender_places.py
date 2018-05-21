@@ -78,6 +78,9 @@ def check_acl_val_file():
 def fill_wav_manually(files_found, files_not_found):
     """
     For not found files, pick another wav file by hand (programmatically no success)
+    :param files_found:
+    :param files_not_found:
+    :return:
     """
 
     # A single dictionary in order to easily copy the files to the other folder
@@ -235,3 +238,4 @@ def compare_rounds(file_first_round, file_second_round):
         if gender_first_round[key] != value:
             print('{} is not the same'.format(key))
 
+create_val_gender('../data/speaker_gender_second_count.txt')
