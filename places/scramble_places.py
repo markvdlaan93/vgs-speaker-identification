@@ -81,6 +81,33 @@ def rec_layers():
     Average accuracy over all folds is thus 0.22125000000000003
     Average F1-score over all folds is thus 0.22521851939947127
 
+    CV results for recurrent layer 3
+    F1-score for fold 1 is 0.29406302433275455
+    Accuracy score for fold 1 is 0.26875
+    F1-score for fold 2 is 0.19679834054834056
+    Accuracy score for fold 2 is 0.16875
+    F1-score for fold 3 is 0.23885296897584216
+    Accuracy score for fold 3 is 0.23125
+    F1-score for fold 4 is 0.2360669869441799
+    Accuracy score for fold 4 is 0.20625
+    F1-score for fold 5 is 0.1888486919575159
+    Accuracy score for fold 5 is 0.1875
+    Average accuracy over all folds is thus 0.2125
+    Average F1-score over all folds is thus 0.23092600255172663
+
+    CV results for recurrent layer 4
+    F1-score for fold 1 is 0.3285688716424505
+    Accuracy score for fold 1 is 0.30625
+    F1-score for fold 2 is 0.22099635535130902
+    Accuracy score for fold 2 is 0.19375
+    F1-score for fold 3 is 0.26596119929453266
+    Accuracy score for fold 3 is 0.2625
+    F1-score for fold 4 is 0.20788434408013626
+    Accuracy score for fold 4 is 0.19375
+    F1-score for fold 5 is 0.2084466900671843
+    Accuracy score for fold 5 is 0.2125
+    Average accuracy over all folds is thus 0.23374999999999999
+    Average F1-score over all folds is thus 0.24637149208712258
 
     :return:
     """
@@ -138,5 +165,5 @@ def cross_val(X_train, y_train):
 
 # mfcc()
 # conv()
-# rec_layers()
-emb()
+rec_layers()
+# emb()
