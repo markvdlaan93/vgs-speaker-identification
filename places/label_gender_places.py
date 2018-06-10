@@ -53,7 +53,7 @@ def check_acl_val_file():
             if parts[0] in keys_full_lines.values():
                 wav_dict[parts[0]] = parts[1]
 
-    # Make sure that the amount of wav paths is equal to
+    # Make sure that the amount of wav paths is equal to keys
     assert len(keys_full_lines.keys()) == len(wav_dict.keys())
 
     # Copy wav file for each speaker to a separate folder
