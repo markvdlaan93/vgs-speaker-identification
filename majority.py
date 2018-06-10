@@ -17,6 +17,7 @@ def majority(val_spk):
 
     majority_speaker = counts[counts.shape[0] - 1]
 
+    # Majority baseline is 360/5000 = 0.072
     return counts, (majority_speaker[1] / total_occurrences)
 
 def majority_places(val_spk):

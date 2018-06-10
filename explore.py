@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import load_data
 import label_gender
@@ -54,3 +54,5 @@ def plot_male_female_dist(val_spk):
     plt.xticks([0,1], ['Male','Female'])
     plt.savefig('./img/male_female_distribution.png')
     plt.show()
+
+majority.majority(val_spk)
