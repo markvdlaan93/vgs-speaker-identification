@@ -93,6 +93,22 @@ def rec_layers():
         cross_val(X_train, y_train)
 
 def emb():
+    """
+    F1-score for fold 1 is 0.29975259494957285
+    Accuracy score for fold 1 is 0.305
+    F1-score for fold 2 is 0.26232808994892987
+    Accuracy score for fold 2 is 0.28
+    F1-score for fold 3 is 0.30435692554806126
+    Accuracy score for fold 3 is 0.315
+    F1-score for fold 4 is 0.25389164531060654
+    Accuracy score for fold 4 is 0.265
+    F1-score for fold 5 is 0.30328520089058875
+    Accuracy score for fold 5 is 0.315
+    Average accuracy over all folds is thus 0.296
+    Average F1-score over all folds is thus 0.28472289132955186
+
+    :return:
+    """
     cross_val(val_emb, val_spk_int)
 
 def cross_val(X_train, y_train):
@@ -120,7 +136,7 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
-mfcc()
-conv()
-rec_layers()
+# mfcc()
+# conv()
+# rec_layers()
 emb()
