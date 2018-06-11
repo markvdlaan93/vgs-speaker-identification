@@ -29,6 +29,7 @@ def mfcc():
 
     :return:
     """
+    print("CV results for MFCC layer")
     cross_val(val_mfcc, val_gender)
 
 def conv():
@@ -48,6 +49,7 @@ def conv():
 
     :return:
     """
+    print("CV results for convolutional layer")
     cross_val(val_conv, val_gender)
 
 def rec_layers():
@@ -134,6 +136,7 @@ def emb():
 
     :return:
     """
+    print("CV results for embeddings layer")
     cross_val(val_emb, val_gender)
 
 def cross_val(X_train, y_train):
@@ -189,6 +192,8 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
     :param y_pred:
     :param gender: bool
 
+    Results gender bias research:
+
 
     :return:
     """
@@ -202,7 +207,9 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
         if y_true[i] == gender and y_true[i] == y_pred[i]:
             correctly_classified_items += 1
 
-    return correctly_classified_items / all_items
+    acc = correctly_classified_items / all_items
+    print("Accuracy for gender {} is {}".format(gender, acc))
+    return acc
 
 mfcc()
 conv()
