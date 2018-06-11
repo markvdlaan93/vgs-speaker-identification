@@ -140,8 +140,10 @@ def cross_val(X_train, y_train):
     kf = KFold(n_splits=N_SPLITS, random_state=123)
 
     count           = 1
-    avg_acc         = 0
     avg_f1          = 0
+    avg_f1_male     = 0
+    avg_f1_female   = 0
+    avg_acc         = 0
     avg_acc_male    = 0
     avg_acc_female  = 0
     for train_index, test_index in kf.split(X_train):
@@ -153,22 +155,28 @@ def cross_val(X_train, y_train):
         y_pred = model.predict(fold_x_test)
         f1 = f1_score(fold_y_test, y_pred, average='weighted', labels=np.unique(y_pred))
         acc = accuracy_score(fold_y_test, y_pred)
-        print("F1-score for fold {} is {}".format(count, f1))
-        print("Accuracy score for fold {} is {}".format(count, acc))
+        # print("F1-score for fold {} is {}".format(count, f1))
+        # print("Accuracy score for fold {} is {}".format(count, acc))
 
         # Calculate accuracy per class
-        avg_acc_male   += calculate_accuracy_per_class(fold_y_test, y_pred, True)
-        avg_acc_female += calculate_accuracy_per_class(fold_y_test, y_pred, False)
+        avg_acc_male   += calculate_accuracy_per_class(fold_y_test, y_pred, False)
+        avg_acc_female += calculate_accuracy_per_class(fold_y_test, y_pred, True)
+
+        gender_f1 = f1_score(fold_y_test, y_pred, average=None)
+        avg_f1_male     += gender_f1[0]
+        avg_f1_female   += gender_f1[1]
 
         avg_acc += acc
         avg_f1 += f1
         count += 1
 
-    print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
-    print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
+    # print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
+    # print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
     print("Average accuracy male: {}".format(avg_acc_male / N_SPLITS))
     print("Average accuracy female: {}".format(avg_acc_female / N_SPLITS))
+    print("Average f1-score male: {}".format(avg_f1_male / N_SPLITS))
+    print("Average f1-score female: {}".format(avg_f1_female / N_SPLITS))
     print("")
 
 def calculate_accuracy_per_class(y_true, y_pred, gender):
@@ -180,6 +188,8 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
     :param y_true:
     :param y_pred:
     :param gender: bool
+
+
     :return:
     """
     all_items = 0
@@ -193,3 +203,8 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
             correctly_classified_items += 1
 
     return correctly_classified_items / all_items
+
+mfcc()
+conv()
+rec_layers()
+emb()
