@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split, KFold
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score, f1_score
 import numpy as np
+from sklearn.metrics import confusion_matrix
 
 N_SPLITS = 5
 
@@ -138,9 +139,11 @@ def emb():
 def cross_val(X_train, y_train):
     kf = KFold(n_splits=N_SPLITS, random_state=123)
 
-    count = 1
-    avg_acc = 0
-    avg_f1 = 0
+    count           = 1
+    avg_acc         = 0
+    avg_f1          = 0
+    avg_acc_male    = 0
+    avg_acc_female  = 0
     for train_index, test_index in kf.split(X_train):
         fold_x_train, fold_x_test = X_train[train_index], X_train[test_index]
         fold_y_train, fold_y_test = y_train[train_index], y_train[test_index]
@@ -153,6 +156,10 @@ def cross_val(X_train, y_train):
         print("F1-score for fold {} is {}".format(count, f1))
         print("Accuracy score for fold {} is {}".format(count, acc))
 
+        # Calculate accuracy per class
+        avg_acc_male   += calculate_accuracy_per_class(fold_y_test, y_pred, True)
+        avg_acc_female += calculate_accuracy_per_class(fold_y_test, y_pred, False)
+
         avg_acc += acc
         avg_f1 += f1
         count += 1
@@ -160,3 +167,29 @@ def cross_val(X_train, y_train):
     print("Average accuracy over all folds is thus {}".format(avg_acc / N_SPLITS))
     print("Average F1-score over all folds is thus {}".format(avg_f1 / N_SPLITS))
 
+    print("Average accuracy male: {}".format(avg_acc_male / N_SPLITS))
+    print("Average accuracy female: {}".format(avg_acc_female / N_SPLITS))
+    print("")
+
+def calculate_accuracy_per_class(y_true, y_pred, gender):
+    """
+    In order to verify whether there is any gender bias in data, calculate the accuracy for male and female. The
+    classification_report function of sklearn only has precision, recall and F1-score.
+
+    Accuracy = items classified correctly in class / all items in class
+    :param y_true:
+    :param y_pred:
+    :param gender: bool
+    :return:
+    """
+    all_items = 0
+    for y in y_true:
+        if y == gender:
+            all_items += 1
+
+    correctly_classified_items = 0
+    for i in range(y_true.shape[0]):
+        if y_true[i] == gender and y_true[i] == y_pred[i]:
+            correctly_classified_items += 1
+
+    return correctly_classified_items / all_items
