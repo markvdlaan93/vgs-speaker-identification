@@ -198,8 +198,6 @@ def cross_val(X_train, y_train):
 
     print("Average accuracy male: {}".format(avg_acc_male / N_SPLITS))
     print("Average accuracy female: {}".format(avg_acc_female / N_SPLITS))
-    print("Average f1-score male: {}".format(avg_f1_male / N_SPLITS))
-    print("Average f1-score female: {}".format(avg_f1_female / N_SPLITS))
     print("")
 
 def calculate_accuracy_per_class(y_true, y_pred, gender):
@@ -216,44 +214,30 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
     CV results for MFCC layer
     Average accuracy male: 0.7949859387139739
     Average accuracy female: 0.6284809023404451
-    Average f1-score male: 0.74959099408591
-    Average f1-score female: 0.6628803598698803
 
     CV results for convolutional layer
     Average accuracy male: 0.8349354765339767
     Average accuracy female: 0.5801735405706209
-    Average f1-score male: 0.760627322290188
-    Average f1-score female: 0.6522932743167661
 
     CV results for recurrent layer 1
     Average accuracy male: 0.9486851122861628
     Average accuracy female: 0.9546583109008665
-    Average f1-score male: 0.9544453220290906
-    Average f1-score female: 0.9473169013138337
 
     CV results for recurrent layer 2
     Average accuracy male: 0.9402513724781905
     Average accuracy female: 0.934513705987014
-    Average f1-score male: 0.9418943348549638
-    Average f1-score female: 0.9319680756982873
 
     CV results for recurrent layer 3
     Average accuracy male: 0.9235925017090321
     Average accuracy female: 0.9136110728771939
-    Average f1-score male: 0.9246822780825127
-    Average f1-score female: 0.9120846546088025
 
     CV results for recurrent layer 4
     Average accuracy male: 0.9213751907557979
     Average accuracy female: 0.8884483729672041
-    Average f1-score male: 0.9135973164062511
-    Average f1-score female: 0.897043362918342
 
     CV results for embeddings layer
     Average accuracy male: 0.9124966563253031
     Average accuracy female: 0.8919120345012435
-    Average f1-score male: 0.9099516789000568
-    Average f1-score female: 0.8941730813618882
 
 
     :return:
