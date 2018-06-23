@@ -193,6 +193,47 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
     :param gender: bool
 
     Results gender bias research:
+    CV results for MFCC layer
+    Average accuracy male: 0.8878182737789292
+    Average accuracy female: 0.9076136075263112
+    Average f1-score male: 0.8862839928346208
+    Average f1-score female: 0.908110427906529
+
+    CV results for convolutional layer
+    Average accuracy male: 0.9105079076111963
+    Average accuracy female: 0.8351553601282069
+    Average f1-score male: 0.8646820935496364
+    Average f1-score female: 0.8743829185935551
+
+    CV results for recurrent layer 1
+    Average accuracy male: 0.9615822127548033
+    Average accuracy female: 0.9793781188942479
+    Average f1-score male: 0.9681323552668394
+    Average f1-score female: 0.9735984116073937
+
+    CV results for recurrent layer 2
+    Average accuracy male: 0.9512302651426104
+    Average accuracy female: 0.9677568133705033
+    Average f1-score male: 0.9561033175254868
+    Average f1-score female: 0.9630092601668954
+
+    CV results for recurrent layer 3
+    Average accuracy male: 0.9481794334879623
+    Average accuracy female: 0.9652127524931092
+    Average f1-score male: 0.9533088546673453
+    Average f1-score female: 0.960689060961251
+
+    CV results for recurrent layer 4
+    Average accuracy male: 0.9352958403061491
+    Average accuracy female: 0.9605587727538947
+    Average f1-score male: 0.9439367928309874
+    Average f1-score female: 0.9524977758438627
+
+    CV results for embeddings layer
+    Average accuracy male: 0.9268050264466705
+    Average accuracy female: 0.9457545151561291
+    Average f1-score male: 0.9292284693354158
+    Average f1-score female: 0.9426882205824386
 
 
     :return:
@@ -207,9 +248,7 @@ def calculate_accuracy_per_class(y_true, y_pred, gender):
         if y_true[i] == gender and y_true[i] == y_pred[i]:
             correctly_classified_items += 1
 
-    acc = correctly_classified_items / all_items
-    print("Accuracy for gender {} is {}".format(gender, acc))
-    return acc
+    return correctly_classified_items / all_items
 
 mfcc()
 conv()
