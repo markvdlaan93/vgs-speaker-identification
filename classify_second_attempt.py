@@ -1,10 +1,9 @@
 import load_data
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_split
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score, f1_score
 from sklearn.linear_model import SGDClassifier
 
 val_conv, val_emb, val_rec, val_spk, val_text, val_mfcc = load_data.dataset()
-N_SPLITS = 5
 
 def tune(x, y):
     """
@@ -25,26 +24,11 @@ def tune(x, y):
     clf = GridSearchCV(SGDClassifier(random_state=123, max_iter=1000), parameters, scoring='f1_weighted', verbose=1)
     clf.fit(X_train, y_train)
 
-    print("Best parameters set found on development set:")
-    print()
-    print(clf.best_params_)
-    print()
-    print("Grid scores on development set:")
-    print()
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+    print("Best params: {}".format(clf.best_params_))
 
-    print()
-
-    print("Detailed classification report:")
-    print()
-    print("The model is trained on the full development set.")
-    print("The scores are computed on the full evaluation set.")
-    print()
     y_true, y_pred = y_test, clf.predict(X_test)
-    print(classification_report(y_true, y_pred))
+    print("Accuracy: {}".format(accuracy_score(y_true, y_pred)))
+    print("F1-score: {}".format(f1_score(y_true, y_pred)))
     print()
 
 def classify():
@@ -53,9 +37,12 @@ def classify():
     :return:
     """
     tune(val_mfcc[0:100], val_spk[0:100])
+    exit()
     tune(val_conv[0:100], val_spk[0:100])
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:, i, :]
         tune(layer, val_spk)
     tune(val_emb[0:100], val_spk[0:100])
+
+classify()
