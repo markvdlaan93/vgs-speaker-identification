@@ -40,7 +40,6 @@ def distribution_gender():
     Display distribution between males and females in the places dataset based on manual labeling.
     :return:
     """
-
     _, _, _, _, val_gender = load_data.dataset_places_gender()
 
     male    = 0
@@ -57,4 +56,9 @@ def distribution_gender():
     plt.show()
 
 
-# distribution_gender()
+def gender_bias_scores():
+    """
+    Plot male and female accuracy scores for the Flickr8K and Places dataset
+    :return:
+    """
+    return None
