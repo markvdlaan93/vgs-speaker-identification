@@ -10,7 +10,7 @@ def classify():
     Method which calls for every layer the tune method in order to find the right parameters
     :return:
     """
-    file = './data/tuning/flickr8k-gender.txt'
+    file = './data/tuning/flickr8k-gender-2.txt'
     tune.tune(val_mfcc, val_gender, file)
     tune.tune(val_conv, val_gender, file)
     amount_layers = val_rec.shape[1]

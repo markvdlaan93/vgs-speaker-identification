@@ -11,7 +11,7 @@ def tune(x, y, file):
     :param file: e.g. ./data/tuning/flickr8k-speaker.txt
     :return:
     """
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=123)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=123, stratify=y)
     parameters = {
         'loss': ('log', 'hinge'),
         'penalty': ['l1', 'l2', 'elasticnet'],
