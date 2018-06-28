@@ -1,0 +1,56 @@
+{'alpha': 0.001, 'loss': 'log', 'penalty': 'l2'}
+0.626 (+/-0.041) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'l1'}
+0.753 (+/-0.032) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'l2'}
+0.731 (+/-0.034) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'elasticnet'}
+0.590 (+/-0.036) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'l1'}
+0.758 (+/-0.018) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'l2'}
+0.741 (+/-0.017) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.684 (+/-0.054) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'l1'}
+0.800 (+/-0.022) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'l2'}
+0.796 (+/-0.021) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'elasticnet'}
+0.675 (+/-0.033) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'l1'}
+0.749 (+/-0.025) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'l2'}
+0.740 (+/-0.013) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.708 (+/-0.026) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'l1'}
+0.746 (+/-0.040) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'l2'}
+0.748 (+/-0.029) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'elasticnet'}
+0.683 (+/-0.061) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'l1'}
+0.730 (+/-0.041) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'l2'}
+0.725 (+/-0.025) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.699 (+/-0.028) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'l1'}
+0.711 (+/-0.028) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'l2'}
+0.708 (+/-0.027) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'elasticnet'}
+0.705 (+/-0.039) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'l1'}
+0.697 (+/-0.044) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'l2'}
+0.711 (+/-0.043) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'elasticnet'}
+Accuracy: 0.83
+F1-score: 0.8049237033326352
+
+{'alpha': 0.001, 'loss': 'log', 'penalty': 'l2'}
+0.572 (+/-0.043) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'l1'}
+0.764 (+/-0.044) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'l2'}
+0.720 (+/-0.058) for {'alpha': 0.01, 'loss': 'log', 'penalty': 'elasticnet'}
+0.569 (+/-0.045) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'l1'}
+0.779 (+/-0.026) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'l2'}
+0.752 (+/-0.024) for {'alpha': 0.01, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.677 (+/-0.039) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'l1'}
+0.803 (+/-0.030) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'l2'}
+0.802 (+/-0.031) for {'alpha': 0.001, 'loss': 'log', 'penalty': 'elasticnet'}
+0.674 (+/-0.030) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'l1'}
+0.783 (+/-0.022) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'l2'}
+0.772 (+/-0.029) for {'alpha': 0.001, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.706 (+/-0.040) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'l1'}
+0.758 (+/-0.025) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'l2'}
+0.762 (+/-0.024) for {'alpha': 0.0001, 'loss': 'log', 'penalty': 'elasticnet'}
+0.698 (+/-0.035) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'l1'}
+0.743 (+/-0.022) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'l2'}
+0.740 (+/-0.032) for {'alpha': 0.0001, 'loss': 'hinge', 'penalty': 'elasticnet'}
+0.711 (+/-0.027) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'l1'}
+0.720 (+/-0.015) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'l2'}
+0.722 (+/-0.017) for {'alpha': 1e-05, 'loss': 'log', 'penalty': 'elasticnet'}
+0.711 (+/-0.025) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'l1'}
+0.726 (+/-0.014) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'l2'}
+0.730 (+/-0.023) for {'alpha': 1e-05, 'loss': 'hinge', 'penalty': 'elasticnet'}
+Accuracy: 0.834
+F1-score: 0.814292766359212
+
