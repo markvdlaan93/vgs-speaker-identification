@@ -11,7 +11,7 @@ def tune(x, y, file):
     :param file: e.g. ./data/tuning/flickr8k-speaker.txt
     :return:
     """
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=123, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.4, random_state=123, stratify=y)
     parameters = {
         'loss': ('log', 'hinge'),
         'penalty': ['l1', 'l2', 'elasticnet'],
@@ -22,7 +22,7 @@ def tune(x, y, file):
     result = []
 
     # Weighted because see http://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html
-    clf = GridSearchCV(SGDClassifier(random_state=123, max_iter=1000), parameters, scoring='f1_weighted', verbose=1)
+    clf = GridSearchCV(SGDClassifier(random_state=123, max_iter=1000), parameters, scoring='f1_weighted', verbose=1, n_jobs=-1)
     clf.fit(X_train, y_train)
 
     print("Best params: {}".format(clf.best_params_))
@@ -37,8 +37,8 @@ def tune(x, y, file):
         result.append(str)
 
     y_true, y_pred = y_test, clf.predict(X_test)
-    acc = "Accuracy: {}".format(accuracy_score(y_true, y_pred))
-    f1 = "F1-score: {}".format(f1_score(y_true, y_pred, average='weighted'))
+    acc = "Accuracy: {:.4f}".format(accuracy_score(y_true, y_pred))
+    f1 = "F1-score: {:.4f}".format(f1_score(y_true, y_pred, average='weighted'))
     print(acc)
     print(f1)
     result.append(acc)
