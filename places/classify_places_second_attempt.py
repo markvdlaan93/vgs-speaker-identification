@@ -11,12 +11,13 @@ def classify():
     :return:
     """
     file = '../data/tuning/places-speaker.txt'
-    tune.tune(val_mfcc, val_spk_int, file)
-    tune.tune(val_conv, val_spk_int, file)
+    test_size = 0.4
+    tune.tune(val_mfcc, val_spk_int, file, test_size)
+    tune.tune(val_conv, val_spk_int, file, test_size)
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:, i, :]
-        tune.tune(layer, val_spk_int, file)
-    tune.tune(val_emb, val_spk_int, file)
+        tune.tune(layer, val_spk_int, file, test_size)
+    tune.tune(val_emb, val_spk_int, file, test_size)
 
 classify()

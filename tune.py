@@ -2,16 +2,17 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.linear_model import SGDClassifier
 
-def tune(x, y, file):
+def tune(x, y, file, test_size = 0.2):
     """
     Generic method which performs grid search in conjunctin with k-fold cross validation in order to find the optimal
     parameters
     :param x:
     :param y:
     :param file: e.g. ./data/tuning/flickr8k-speaker.txt
+    :param test_size:
     :return:
     """
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.4, random_state=123, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=123, stratify=y)
     parameters = {
         'loss': ('log', 'hinge'),
         'penalty': ['l1', 'l2', 'elasticnet'],
