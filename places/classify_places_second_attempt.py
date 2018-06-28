@@ -10,7 +10,7 @@ def classify():
     Method which calls for every layer the tune method in order to find the right parameters
     :return:
     """
-    file = '../data/tuning/places-speaker.txt'
+    file = '../data/tuning/places-speaker-2.txt'
     test_size = 0.4
     tune.tune(val_mfcc, val_spk_int, file, test_size)
     tune.tune(val_conv, val_spk_int, file, test_size)
