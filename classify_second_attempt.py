@@ -50,7 +50,7 @@ def tune(x, y, file):
     with open(file, 'a') as file:
         for row in result:
             file.write("{}\n".format(row))
-
+        file.write("\n")
 
 
 def classify():
@@ -58,13 +58,13 @@ def classify():
     Method which calls for every layer the tune method in order to find the right parameters
     :return:
     """
-    tune(val_mfcc[0:100], val_spk[0:100], './data/tuning/flickr8k-speaker.txt')
-    exit()
-    tune(val_conv[0:100], val_spk[0:100])
+    file = './data/tuning/flickr8k-speaker.txt'
+    tune(val_mfcc, val_spk, file)
+    tune(val_conv, val_spk, file)
     amount_layers = val_rec.shape[1]
     for i in range(amount_layers):
         layer = val_rec[:, i, :]
-        tune(layer[0:100], val_spk[0:100])
-    tune(val_emb[0:100], val_spk[0:100])
+        tune(layer, val_spk, file)
+    tune(val_emb, val_spk, file)
 
 classify()
