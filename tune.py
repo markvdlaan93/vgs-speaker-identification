@@ -2,7 +2,7 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.linear_model import SGDClassifier
 
-def tune(x, y, file, test_size = 0.2):
+def tune(x, y, file, test_size = 0.33):
     """
     Generic method which performs grid search in conjunctin with k-fold cross validation in order to find the optimal
     parameters
