@@ -2,7 +2,7 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.linear_model import SGDClassifier
 
-def tune(x, y, file, test_size = 0.33, gender_accuracy = False):
+def tune(x, y, file, test_size = 0.33, gender_accuracy = False, predict_test = True):
     """
     Generic method which performs grid search in conjunctin with k-fold cross validation in order to find the optimal
     parameters
@@ -12,6 +12,7 @@ def tune(x, y, file, test_size = 0.33, gender_accuracy = False):
     :param test_size:
     :param gender_accuracy: if True the accuracy score per class will be given. This is relevant for the gender bias
     research
+    :param predict_test:
     :return:
     """
     X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=123)
@@ -39,25 +40,29 @@ def tune(x, y, file, test_size = 0.33, gender_accuracy = False):
         print(str)
         result.append(str)
 
-    y_true, y_pred = y_test, clf.predict(X_test)
-    acc = "Accuracy: {:.4f}".format(accuracy_score(y_true, y_pred))
-    f1 = "F1-score: {:.4f}".format(f1_score(y_true, y_pred, average='weighted'))
-    print(acc)
-    print(f1)
-    result.append(acc)
-    result.append(f1)
+    if predict_test:
+        y_true, y_pred = y_test, clf.predict(X_test)
+        acc = "Accuracy: {:.4f}".format(accuracy_score(y_true, y_pred))
+        f1 = "F1-score: {:.4f}".format(f1_score(y_true, y_pred, average='weighted'))
+        print(acc)
+        print(f1)
+        result.append(acc)
+        result.append(f1)
 
     with open(file, 'a') as f:
         for row in result:
             f.write("{}\n".format(row))
         f.write("\n")
 
-    if gender_accuracy:
+    # Prints accuracy and F1-score per gender
+    if gender_accuracy and predict_test:
         male_acc = calculate_accuracy_per_class(y_true, y_pred, False)
         female_acc = calculate_accuracy_per_class(y_true, y_pred, True)
         with open(file, 'a') as f:
             f.write("{}\n".format("Male accuracy: ".format(male_acc)))
             f.write("{}\n".format("Female accuracy: ").format(female_acc))
+
+            f1_score(y_true, y_pred, average=None)
 
 
 
