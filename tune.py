@@ -14,6 +14,12 @@ def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy =
     :param gender_accuracy: if True the accuracy score per class will be given. This is relevant for the gender bias
     research
     :param predict_test:
+
+    Final result:
+    - Flickr8K speaker identification: flickr8k-speaker.txt
+    - Places gender identification: places-gender-3.txt
+    - Places speaker identification: places-speaker.txt
+    - Flickr8K gender identification: flickr8k-gender-3.txt
     :return:
     """
     if stratification:
@@ -54,20 +60,29 @@ def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy =
         result.append(acc)
         result.append(f1)
 
+        with open(file, 'a') as f:
+            for row in result:
+                f.write("{}\n".format(row))
+            f.write("\n")
+
         # Prints accuracy and F1-score per gender
         if gender_accuracy:
             male_acc = calculate_accuracy_per_class(y_true, y_pred, False)
             female_acc = calculate_accuracy_per_class(y_true, y_pred, True)
             with open(file, 'a') as f:
-                f.write("{}\n".format("Male accuracy: ".format(male_acc)))
-                f.write("{}\n".format("Female accuracy: ").format(female_acc))
+                f.write("{}\n".format("Male accuracy: {:.4f}".format(male_acc)))
+                f.write("{}\n".format("Female accuracy: {:.4f}").format(female_acc))
 
-                f1_score(y_true, y_pred, average=None)
+                f.write("\n")
 
-    with open(file, 'a') as f:
-        for row in result:
-            f.write("{}\n".format(row))
-        f.write("\n")
+                f1_per_class = f1_score(y_true, y_pred, average=None)
+                f.write("{}\n".format("Male f1-score: {:.4f}".format(f1_per_class[0])))
+                f.write("{}\n".format("Female f1-score: {:.4f}").format(f1_per_class[1]))
+
+                f.write("-------------------------")
+                f.write("\n")
+
+
 
 
 
