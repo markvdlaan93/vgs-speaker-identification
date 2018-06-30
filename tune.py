@@ -2,7 +2,7 @@ from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.linear_model import SGDClassifier
 
-def tune(x, y, file, test_size = 0.33, gender_accuracy = False, predict_test = True):
+def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy = False, predict_test = True):
     """
     Generic method which performs grid search in conjunctin with k-fold cross validation in order to find the optimal
     parameters
@@ -10,12 +10,17 @@ def tune(x, y, file, test_size = 0.33, gender_accuracy = False, predict_test = T
     :param y:
     :param file: e.g. ./data/tuning/flickr8k-speaker.txt
     :param test_size:
+    :param stratification:
     :param gender_accuracy: if True the accuracy score per class will be given. This is relevant for the gender bias
     research
     :param predict_test:
     :return:
     """
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=123)
+    if stratification:
+        X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=123, stratify=y)
+    else:
+        X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=123)
+
     parameters = {
         'loss': ('log', 'hinge'),
         'penalty': ['l1', 'l2', 'elasticnet'],
