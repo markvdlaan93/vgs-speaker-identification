@@ -1,5 +1,5 @@
 from sklearn.model_selection import GridSearchCV, train_test_split
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, classification_report
 from sklearn.linear_model import SGDClassifier
 
 def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy = False, predict_test = True):
@@ -14,6 +14,9 @@ def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy =
     :param gender_accuracy: if True the accuracy score per class will be given. This is relevant for the gender bias
     research
     :param predict_test:
+
+    This code is partially taken from the Scikit-learn documentation:
+    http://scikit-learn.org/stable/auto_examples/model_selection/plot_grid_search_digits.html
 
     Final result:
     - Flickr8K speaker identification: flickr8k-speaker.txt
@@ -53,6 +56,7 @@ def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy =
 
     if predict_test:
         y_true, y_pred = y_test, clf.predict(X_test)
+
         acc = "Accuracy: {:.4f}".format(accuracy_score(y_true, y_pred))
         f1 = "F1-score: {:.4f}".format(f1_score(y_true, y_pred, average='weighted'))
         print(acc)
