@@ -61,4 +61,14 @@ def gender_bias_scores():
     Plot male and female accuracy scores for the Flickr8K and Places dataset
     :return:
     """
-    return None
+
+    # Flickr8K gender classification
+    x = [1, 2, 3, 4, 5, 6, 7]
+    y = [0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2]
+    my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
+    plt.xticks(x, my_xticks)
+    plt.plot(x, y)
+    plt.axis([0, 8, 0, 1])
+    plt.savefig('../img/gender-bias.png')
+
+gender_bias_scores()
