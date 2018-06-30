@@ -67,21 +67,26 @@ def gender_classification_scores():
     y = [0.8049, 0.8143, 0.9313, 0.9200, 0.9100, 0.9000, 0.8989]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y)
+    plt.plot(x, y, label='Flickr8K speaker classification')
 
     # Flickr8K gender classification F1-scores
     y = [0.7477, 0.7520, 0.9552, 0.9564, 0.9418, 0.9339, 0.9054]
-    plt.plot(x, y)
+    plt.plot(x, y, label='Flickr8K gender classification')
 
     # Places gender classification F1-scores
     y = [0.8647, 0.8746, 0.9750, 0.9600, 0.9675, 0.9575, 0.9249]
-    plt.plot(x, y)
+    plt.plot(x, y, label='Places gender classification')
 
     # Places speaker classification F1-score
     y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
-    plt.plot(x, y)
+    plt.plot(x, y, label='Places speaker classification')
 
     plt.axis([0, 8, 0.7, 1])
-    plt.savefig('../img/gender-classification.png')
+    fig = plt.figure(1)
+    ax = fig.add_subplot(111)
+    handles, labels = ax.get_legend_handles_labels()
+    lgd = ax.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.1))
+    ax.grid('on')
+    plt.savefig('../img/gender-speaker-classification.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 gender_classification_scores()
