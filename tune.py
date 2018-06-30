@@ -4,7 +4,7 @@ from sklearn.linear_model import SGDClassifier
 
 def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy = False, predict_test = True):
     """
-    Generic method which performs grid search in conjunctin with k-fold cross validation in order to find the optimal
+    Generic method which performs grid search in conjunction with k-fold cross validation in order to find the optimal
     parameters
     :param x:
     :param y:
