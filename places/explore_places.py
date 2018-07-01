@@ -56,9 +56,70 @@ def distribution_gender():
     plt.show()
 
 
-def gender_bias_scores():
+def gender_classification_scores():
     """
     Plot male and female accuracy scores for the Flickr8K and Places dataset
     :return:
     """
-    return None
+
+    # Flickr8K speaker classification F1-scores @todo add real values of Flickr8K speaker identification
+    x = [1, 2, 3, 4, 5, 6, 7]
+    y = [0.8049, 0.8143, 0.9313, 0.9200, 0.9100, 0.9000, 0.8989]
+    my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
+    plt.xticks(x, my_xticks)
+    plt.plot(x, y, label='Flickr8K speaker classification')
+
+    # Flickr8K gender classification F1-scores
+    y = [0.7477, 0.7520, 0.9552, 0.9564, 0.9418, 0.9339, 0.9054]
+    plt.plot(x, y, label='Flickr8K gender classification')
+
+    # Places gender classification F1-scores
+    y = [0.8647, 0.8746, 0.9750, 0.9600, 0.9675, 0.9575, 0.9249]
+    plt.plot(x, y, label='Places gender classification')
+
+    # Places speaker classification F1-score
+    y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
+    plt.plot(x, y, label='Places speaker classification')
+
+    plt.axis([0, 8, 0.7, 1])
+    fig = plt.figure(1)
+    ax = fig.add_subplot(111)
+    handles, labels = ax.get_legend_handles_labels()
+    lgd = ax.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.1))
+    ax.grid('on')
+    plt.savefig('../img/gender-speaker-classification.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+
+def gender_bias_scores():
+    """
+    Gender scores per dataset
+    :return:
+    """
+    # F1-score male Flickr8K
+    x = [1, 2, 3, 4, 5, 6, 7]
+    y = [0.7767, 0.7719, 0.9584, 0.9594, 0.9459, 0.9388, 0.9131]
+    my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
+    plt.xticks(x, my_xticks)
+    plt.plot(x, y, label='Flickr8K male')
+
+    # F1-score female Flickr8K
+    y = [0.7137, 0.7286, 0.9513, 0.9529, 0.9371, 0.9282, 0.8963]
+    plt.plot(x, y, label='Flickr8K female')
+
+    # F1-score male Places
+    y = [0.8466, 0.8571, 0.9722, 0.9560, 0.9638, 0.9524, 0.9153]
+    plt.plot(x, y, label='Places male')
+
+    # F1-score female Places
+    y = [0.8795, 0.8889, 0.9773, 0.9633, 0.9705, 0.9616, 0.9327]
+    plt.plot(x, y, label='Places female')
+
+    plt.axis([0, 8, 0.7, 1])
+    fig = plt.figure(1)
+    ax = fig.add_subplot(111)
+    handles, labels = ax.get_legend_handles_labels()
+    lgd = ax.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.1))
+    ax.grid('on')
+    plt.savefig('../img/gender-bias.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+
+
+gender_bias_scores()
