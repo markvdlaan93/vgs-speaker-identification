@@ -131,7 +131,28 @@ def gender_bias_scores():
     build_plot('../img/gender-bias.png', 0.7)
 
 def gender_bias_accuracy_scores():
-    return None
+    """
+    :return:
+    """
+    x = [1, 2, 3, 4, 5, 6, 7]
+    y = [0.8090, 0.7775, 0.9584, 0.9551, 0.9427, 0.9393, 0.9213]
+    my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
+    plt.xticks(x, my_xticks)
+    plt.plot(x, y, label='Flickr8K male')
+
+    # Accuracy female Flickr8K
+    y = [0.6789, 0.7224, 0.9513, 0.9579, 0.9408, 0.9371, 0.8868]
+    plt.plot(x, y, label='Flickr8K female')
+
+    # Accuracy male Places
+    y = [0.8278, 0.8333, 0.9722, 0.9667, 0.9611, 0.9444, 0.9000]
+    plt.plot(x, y, label='Places male')
+
+    # Accuracy female Places
+    y = [0.8955, 0.9091, 0.9773, 0.9545, 0.9727, 0.9682, 0.9455]
+    plt.plot(x, y, label='Places female')
+
+    build_plot('../img/gender-bias-accuracy.png', 0.65)
 
 
 def build_plot(file_name, x_start):
@@ -148,4 +169,5 @@ def build_plot(file_name, x_start):
     plt.savefig(file_name, bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 
-gender_speaker_accuracy_classification_scores()
+
+gender_bias_accuracy_scores()
