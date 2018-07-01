@@ -81,13 +81,10 @@ def gender_speaker_classification_scores():
     y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
     plt.plot(x, y, label='Places speaker classification')
 
-    plt.axis([0, 8, 0.6, 1])
-    fig = plt.figure(1)
-    ax = fig.add_subplot(111)
-    handles, labels = ax.get_legend_handles_labels()
-    lgd = ax.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.1))
-    ax.grid('on')
-    plt.savefig('../img/gender-speaker-classification.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+    build_plot('../img/gender-speaker-classification.png', 0.6)
+
+def gender_speaker_accuracy_classification_scores():
+    return None
 
 def gender_bias_scores():
     """
@@ -113,13 +110,21 @@ def gender_bias_scores():
     y = [0.8795, 0.8889, 0.9773, 0.9633, 0.9705, 0.9616, 0.9327]
     plt.plot(x, y, label='Places female')
 
-    plt.axis([0, 8, 0.7, 1])
+    build_plot('../img/gender-bias.png', 0.7)
+
+
+def build_plot(file_name, x_start):
+    """
+    :param file_name:
+    :return:
+    """
+    plt.axis([0, 8, x_start, 1])
     fig = plt.figure(1)
     ax = fig.add_subplot(111)
     handles, labels = ax.get_legend_handles_labels()
     lgd = ax.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.1))
     ax.grid('on')
-    plt.savefig('../img/gender-bias.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
+    plt.savefig(file_name, bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 
 gender_speaker_classification_scores()
