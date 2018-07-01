@@ -56,7 +56,7 @@ def distribution_gender():
     plt.show()
 
 
-def gender_classification_scores():
+def gender_speaker_classification_scores():
     """
     Plot male and female accuracy scores for the Flickr8K and Places dataset
     :return:
@@ -64,7 +64,7 @@ def gender_classification_scores():
 
     # Flickr8K speaker classification F1-scores @todo add real values of Flickr8K speaker identification
     x = [1, 2, 3, 4, 5, 6, 7]
-    y = [0.8049, 0.8143, 0.9313, 0.9200, 0.9100, 0.9000, 0.8989]
+    y = [0.8049, 0.8143, 0.9313, 0.8756, 0.8396, 0.8042, 0.6055]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
     plt.plot(x, y, label='Flickr8K speaker classification')
@@ -81,7 +81,7 @@ def gender_classification_scores():
     y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
     plt.plot(x, y, label='Places speaker classification')
 
-    plt.axis([0, 8, 0.7, 1])
+    plt.axis([0, 8, 0.6, 1])
     fig = plt.figure(1)
     ax = fig.add_subplot(111)
     handles, labels = ax.get_legend_handles_labels()
@@ -122,4 +122,4 @@ def gender_bias_scores():
     plt.savefig('../img/gender-bias.png', bbox_extra_artists=(lgd,), bbox_inches='tight')
 
 
-gender_bias_scores()
+gender_speaker_classification_scores()
