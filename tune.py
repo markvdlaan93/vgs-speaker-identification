@@ -20,9 +20,9 @@ def tune(x, y, file, test_size = 0.33, stratification = False, gender_accuracy =
 
     Final result:
     - Flickr8K speaker identification: flickr8k-speaker.txt
-    - Places gender identification: places-gender-3.txt
+    - Places gender identification: places-gender.txt
     - Places speaker identification: places-speaker.txt
-    - Flickr8K gender identification: flickr8k-gender-3.txt
+    - Flickr8K gender identification: flickr8k-gender.txt
     :return:
     """
     if stratification:
