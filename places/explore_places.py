@@ -31,9 +31,9 @@ def distribution():
     x_labels = list(range(1, len(counts) + 1))
 
     plt.bar(x_labels, y_labels, align='center')
-    plt.xlabel('Speaker')
+    plt.xlabel('Speaker ID')
     plt.ylabel('Occurrences')
-    plt.show()
+    plt.savefig('../img/places/distribution.png')
 
 def distribution_gender():
     """
@@ -170,4 +170,4 @@ def build_plot(file_name, x_start):
 
 
 
-gender_bias_accuracy_scores()
+distribution()
