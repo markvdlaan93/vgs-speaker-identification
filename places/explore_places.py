@@ -62,7 +62,7 @@ def gender_speaker_classification_scores():
     :return:
     """
 
-    # Flickr8K speaker classification F1-scores @todo add real values of Flickr8K speaker identification
+    # Flickr8K speaker classification F1-scores
     x = [1, 2, 3, 4, 5, 6, 7]
     y = [0.8049, 0.8143, 0.9313, 0.8756, 0.8396, 0.8042, 0.6055]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
