@@ -114,7 +114,7 @@ def gender_bias_scores():
     y = [0.7767, 0.7719, 0.9584, 0.9594, 0.9459, 0.9388, 0.9131]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y, label='Flickr8K male')
+    plt.plot(x, y, label='Flickr8K male', linestyle='dashed')
 
     # F1-score female Flickr8K
     y = [0.7137, 0.7286, 0.9513, 0.9529, 0.9371, 0.9282, 0.8963]
@@ -122,7 +122,7 @@ def gender_bias_scores():
 
     # F1-score male Places
     y = [0.8466, 0.8571, 0.9722, 0.9560, 0.9638, 0.9524, 0.9153]
-    plt.plot(x, y, label='Places male')
+    plt.plot(x, y, label='Places male', linestyle='dashed')
 
     # F1-score female Places
     y = [0.8795, 0.8889, 0.9773, 0.9633, 0.9705, 0.9616, 0.9327]
@@ -138,7 +138,7 @@ def gender_bias_accuracy_scores():
     y = [0.8090, 0.7775, 0.9584, 0.9551, 0.9427, 0.9393, 0.9213]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y, label='Flickr8K male')
+    plt.plot(x, y, label='Flickr8K male', linestyle='dashed')
 
     # Accuracy female Flickr8K
     y = [0.6789, 0.7224, 0.9513, 0.9579, 0.9408, 0.9371, 0.8868]
@@ -146,7 +146,7 @@ def gender_bias_accuracy_scores():
 
     # Accuracy male Places
     y = [0.8278, 0.8333, 0.9722, 0.9667, 0.9611, 0.9444, 0.9000]
-    plt.plot(x, y, label='Places male')
+    plt.plot(x, y, label='Places male', linestyle='dashed')
 
     # Accuracy female Places
     y = [0.8955, 0.9091, 0.9773, 0.9545, 0.9727, 0.9682, 0.9455]
@@ -170,4 +170,4 @@ def build_plot(file_name, x_start):
 
 
 
-gender_speaker_accuracy_classification_scores()
+gender_bias_scores()
