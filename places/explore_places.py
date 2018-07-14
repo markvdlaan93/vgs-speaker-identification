@@ -67,7 +67,7 @@ def gender_speaker_classification_scores():
     y = [0.8049, 0.8143, 0.9313, 0.8756, 0.8396, 0.8042, 0.6055]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y, label='Flickr8K speaker classification')
+    plt.plot(x, y, label='Flickr8K speaker classification', linestyle='dashed')
 
     # Flickr8K gender classification F1-scores
     y = [0.7477, 0.7520, 0.9552, 0.9564, 0.9418, 0.9339, 0.9054]
@@ -79,7 +79,7 @@ def gender_speaker_classification_scores():
 
     # Places speaker classification F1-score
     y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
-    plt.plot(x, y, label='Places speaker classification')
+    plt.plot(x, y, label='Places speaker classification', linestyle='dashed')
 
     build_plot('../img/gender-speaker-classification.png', 0.6)
 
@@ -170,4 +170,4 @@ def build_plot(file_name, x_start):
 
 
 
-distribution()
+gender_speaker_classification_scores()
