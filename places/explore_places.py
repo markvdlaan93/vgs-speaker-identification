@@ -67,19 +67,19 @@ def gender_speaker_classification_scores():
     y = [0.8049, 0.8143, 0.9313, 0.8756, 0.8396, 0.8042, 0.6055]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y, label='Flickr8K speaker classification', linestyle='dashed')
+    plt.plot(x, y, label='Flickr8K speaker classification (baseline = 7.2%)', linestyle='dashed')
 
     # Places speaker classification F1-score
     y = [0.7695, 0.8026, 0.8544, 0.7836, 0.7979, 0.7814, 0.7329]
-    plt.plot(x, y, label='Places speaker classification', linestyle='dashed')
+    plt.plot(x, y, label='Places speaker classification (baseline = 36.2%)', linestyle='dashed')
 
     # Flickr8K gender classification F1-scores
     y = [0.7477, 0.7520, 0.9552, 0.9564, 0.9418, 0.9339, 0.9054]
-    plt.plot(x, y, label='Flickr8K gender classification')
+    plt.plot(x, y, label='Flickr8K gender classification (baseline = 53.95%)')
 
     # Places gender classification F1-scores
     y = [0.8647, 0.8746, 0.9750, 0.9600, 0.9675, 0.9575, 0.9249]
-    plt.plot(x, y, label='Places gender classification')
+    plt.plot(x, y, label='Places gender classification (baseline = 50%)')
 
     build_plot('../img/gender-speaker-classification.png', 0.6)
 
@@ -88,19 +88,19 @@ def gender_speaker_accuracy_classification_scores():
     y = [0.8300, 0.8340, 0.9406, 0.8939, 0.8630, 0.8291, 0.6461]
     my_xticks = ['MFCC', 'Conv.', 'Rec. 1', 'Rec. 2', 'Rec. 3', 'Rec. 4', 'Emb.']
     plt.xticks(x, my_xticks)
-    plt.plot(x, y, label='Flickr8K speaker classification', linestyle='dashed')
+    plt.plot(x, y, label='Flickr8K speaker classification (baseline = 7.2%)', linestyle='dashed')
 
     # Places speaker classification F1-score
     y = [0.8200, 0.8300, 0.8850, 0.8350, 0.8375, 0.8325, 0.7825]
-    plt.plot(x, y, label='Places speaker classification', linestyle='dashed')
+    plt.plot(x, y, label='Places speaker classification (baseline = 36.2%)', linestyle='dashed')
 
     # Flickr8K gender classification F1-scores
     y = [0.7491, 0.7521, 0.9552, 0.9564, 0.9418, 0.9339, 0.9055]
-    plt.plot(x, y, label='Flickr8K gender classification')
+    plt.plot(x, y, label='Flickr8K gender classification (baseline = 53.95%)')
 
     # Places gender classification F1-scores
     y = [0.8650, 0.8750, 0.9750, 0.9600, 0.9675, 0.9575, 0.9250]
-    plt.plot(x, y, label='Places gender classification')
+    plt.plot(x, y, label='Places gender classification (baseline = 50%)')
 
     build_plot('../img/gender-speaker-classification-accuracy.png', 0.6)
 
@@ -170,6 +170,6 @@ def build_plot(file_name, x_start):
 
 
 #gender_speaker_classification_scores()
-#gender_speaker_accuracy_classification_scores()
+gender_speaker_accuracy_classification_scores()
 #gender_bias_scores()
-gender_bias_accuracy_scores()
+#gender_bias_accuracy_scores()
